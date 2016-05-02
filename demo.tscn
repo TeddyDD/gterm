@@ -1,4 +1,6 @@
-[gd_scene format=1]
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://addons/terminal/terminal.tscn" type="PackedScene" id=1]
 
 [node name="Panel" type="Panel"]
 
@@ -12,5 +14,111 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
+__meta__ = { "_edit_lock_":true }
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 10.0
+margin/top = 10.0
+margin/right = 10.0
+margin/bottom = 10.0
+alignment = 0
+__meta__ = { "_edit_lock_":true }
+
+[node name="Terminal" parent="VBoxContainer" instance=ExtResource( 1 )]
+
+anchor/right = 0
+anchor/bottom = 0
+size_flags/vertical = 3
+margin/right = 1004.0
+margin/bottom = 557.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 561.0
+margin/right = 1004.0
+margin/bottom = 580.0
+alignment = 0
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 43.0
+margin/bottom = 19.0
+toggle_mode = false
+text = "test1"
+flat = false
+
+[node name="Button1" type="Button" parent="VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 47.0
+margin/top = 0.0
+margin/right = 90.0
+margin/bottom = 19.0
+toggle_mode = false
+text = "test2"
+flat = false
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 94.0
+margin/top = 0.0
+margin/right = 137.0
+margin/bottom = 19.0
+toggle_mode = false
+text = "test3"
+flat = false
+
+[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 141.0
+margin/top = 0.0
+margin/right = 184.0
+margin/bottom = 19.0
+toggle_mode = false
+text = "test4"
+flat = false
+
+[node name="Button4" type="Button" parent="VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 188.0
+margin/top = 0.0
+margin/right = 231.0
+margin/bottom = 19.0
+toggle_mode = false
+text = "test5"
+flat = false
 
 

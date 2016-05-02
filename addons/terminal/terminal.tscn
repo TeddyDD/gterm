@@ -4,14 +4,18 @@
 
 [node name="Terminal" type="Control"]
 
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
+margin/right = 984.0
+margin/bottom = 560.0
 script/script = ExtResource( 1 )
+
+[connection signal="resized" from="." to="." method="_on_resize"]
 
 
