@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://addons/terminal/terminal.tscn" type="PackedScene" id=1]
+[ext_resource path="res://fonts/inconsolata.tres" type="DynamicFont" id=2]
 
 [node name="Panel" type="Panel"]
 
@@ -38,6 +39,7 @@ anchor/bottom = 0
 size_flags/vertical = 3
 margin/right = 1004.0
 margin/bottom = 557.0
+dynamicFont = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 

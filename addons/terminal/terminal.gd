@@ -1,7 +1,17 @@
 
 extends Control
 
+# export variables
+export(int) var min_columns = 1
+export(int) var min_rows = 1
+
+export (DynamicFont) var dynamicFont
+
+# private variables
+var font
+
 func _ready():
+	font = dynamicFont
 	update()
 
 func _draw():
@@ -13,3 +23,4 @@ func get_minimum_size(): # override
 	
 func _on_resize(): # signal
 	prints("Size ",get_size())
+
