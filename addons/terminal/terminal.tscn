@@ -18,6 +18,12 @@ script/script = ExtResource( 1 )
 min_columns = 1
 min_rows = 1
 dynamicFont = null
+font_x_offset = 0
+font_y_offset = 0
+resize_cell_x = 0
+resize_cell_y = 0
+foregound_default = null
+background_default = null
 
 [connection signal="resized" from="." to="." method="_on_resize"]
 
