@@ -32,7 +32,7 @@ func _ready():
 	update()
 
 func _draw():
-	draw_rect(get_rect(), Color(1,1,1,1))
+	draw_rect(get_rect(), background_default)
 
 func get_minimum_size(): # override
 	# TODO

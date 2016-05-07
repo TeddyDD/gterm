@@ -40,6 +40,8 @@ size_flags/vertical = 3
 margin/right = 1004.0
 margin/bottom = 557.0
 dynamicFont = ExtResource( 2 )
+foregound_default = Color( 1, 1, 1, 1 )
+background_default = Color( 0, 0, 0, 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 
