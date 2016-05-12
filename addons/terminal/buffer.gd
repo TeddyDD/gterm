@@ -24,6 +24,11 @@ func index(point):
 	var row = point.y
 	return ((row-1) * size.width) + (column - 1)
 	
+func transfer_to(buffer):
+	for y in buffer.size.y:
+		for x in buffer.size.x:
+			pass
+
 func set_default(c, fg, bg):
 	# resize buffers
 	var b = size.width * size.height
