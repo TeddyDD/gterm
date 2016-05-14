@@ -26,8 +26,13 @@ func index(point):
 	
 func transfer_to(buffer):
 	for y in buffer.size.y:
-		for x in buffer.size.x:
-			pass
+		if y <= size.y:
+			for x in buffer.size.x:
+				if x <= size.x:
+					var i = index(Vector2(x,y))
+					chars[i] = buffer.chars[i]
+					fgcolors[i] = buffer.fgcolors[i]
+					bgcolors[i] = buffer.bgcolors[i]
 
 func set_default(c, fg, bg):
 	# resize buffers
