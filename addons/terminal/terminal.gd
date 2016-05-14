@@ -27,14 +27,16 @@ var font
 var grid = Vector2() # rows and collumns
 var cell = Vector2() # cell size in pixels
 
+var Buffer = preload("res://addons/terminal/buffer.gd")
 var buffer
 
 func _ready():
 	font = dynamicFont
 	assert(font != null)
-	var Buffer = preload("res://addons/terminal/buffer.gd")
-#	buffer = Buffer.new(grid,foregound_default,background_default," ")
+
 	calculate_size()
+	prints(grid)
+	buffer = Buffer.new(grid,foregound_default,background_default," ")
 	update()
 
 func _draw():
@@ -42,8 +44,7 @@ func _draw():
 
 # Calculate the grid size. Final result depens of font size
 func calculate_size():
-	if font == null: # this was called by _on_resize signal before font was loaded
-		return
+	
 	var width = get_size().width
 	var height = get_size().height
 	
@@ -52,7 +53,6 @@ func calculate_size():
 	
 	grid.width = ( width - (int(width) % int(cell.width)) ) / cell.width
 	grid.height = ( height - (int(height) % int(cell.height)) ) / cell.height
-	prints(grid)
 
 func get_minimum_size(): # override
 	# TODO
@@ -61,4 +61,10 @@ func get_minimum_size(): # override
 # Call manually when changed font size
 func _on_resize(): # signal
 	prints("Size ",get_size())
-	calculate_size()
+	if font != null:
+		calculate_size()
+	if grid.x > 0 and grid.y > 0:
+		var b = Buffer.new(grid,foregound_default,background_default," ")
+		b.transfer_from(buffer)
+		buffer = b
+	update()
