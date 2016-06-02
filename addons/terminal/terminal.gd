@@ -66,10 +66,11 @@ func get_minimum_size(): # override
 # Call manually when changed font size
 func _on_resize(): # signal
 	if ready:
+		var old_grid = grid
 		prints("Size ",get_size())
 		if font != null:
 			calculate_size()
-		if grid.x > 0 and grid.y > 0:
+		if grid.x > 0 and grid.y > 0 and old_grid != grid:
 			var b = Buffer.new(grid,foregound_default,background_default," ")
 			b.transfer_from(buffer)
 			buffer = b
