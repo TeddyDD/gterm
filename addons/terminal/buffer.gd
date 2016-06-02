@@ -1,17 +1,17 @@
 extends Reference
 
-var size = Vector2() # size of buffer: Vector2
+var size # size of buffer: Vector2
 
-var chars    = [] # array of chars
-var fgcolors = [] # foreground (text) colors
-var bgcolors = [] # background colors
+var chars    # array of chars
+var fgcolors # foreground (text) colors
+var bgcolors # background colors
 
-# Create buffer of given size (Vector2D) and fill with default values
+# Create buffer of given size_c_r (Vector2D, columns, rows) and fill with default values
 # empty_char by default is " " (space)
-func _init(terminal_size, fg, bg, empty_char):
+func _init(size_c_r, fg, bg, empty_char):
 	if not empty_char:
 		empty_char == " "
-	size = terminal_size
+	size = size_c_r
 		# initialize arrays
 	chars = []
 	fgcolors = []
@@ -26,9 +26,9 @@ func index(point):
 	
 func transfer_from(buffer):
 	for y in range(1, buffer.size.y + 1):
-#		if y <= size.y:
+		if y <= size.y:
 			for x in range(1, buffer.size.x + 1):
-#				if x <= size.x:
+				if x <= size.x:
 					var i = index(Vector2(x,y))
 					chars[i] = buffer.chars[i]
 					fgcolors[i] = buffer.fgcolors[i]
