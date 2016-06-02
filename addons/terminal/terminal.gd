@@ -20,6 +20,7 @@ export(int) var resize_cell_y = 0
 
 export(Color, RGB) var foregound_default  # default text color
 export(Color, RGB) var background_default # default background color
+export var default_char = " " # one char
 
 # private variables
 var font
@@ -38,7 +39,7 @@ func _ready():
 
 	calculate_size()
 	prints(grid)
-	buffer = Buffer.new(grid,foregound_default,background_default," ")
+	buffer = Buffer.new(grid,foregound_default,background_default, default_char)
 	ready = true
 	update()
 
@@ -67,7 +68,7 @@ func _on_resize(): # signal
 		if font != null:
 			calculate_size()
 		if grid.x > 0 and grid.y > 0 and old_grid != grid:
-			var b = Buffer.new(grid,foregound_default,background_default," ")
+			var b = Buffer.new(grid,foregound_default,background_default, default_char)
 			b.transfer_from(buffer)
 			buffer = b
 	update()

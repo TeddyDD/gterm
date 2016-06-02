@@ -9,14 +9,12 @@ var bgcolors # background colors
 # Create buffer of given size_c_r (Vector2D, columns, rows) and fill with default values
 # empty_char by default is " " (space)
 func _init(size_c_r, fg, bg, empty_char):
-	if not empty_char:
-		empty_char == " "
 	size = size_c_r
 		# initialize arrays
 	chars = []
 	fgcolors = []
 	bgcolors = []
-	set_default(" ",fg,bg)
+	set_default(empty_char,fg,bg)
 
 # returns index for given column and row
 func index(point):

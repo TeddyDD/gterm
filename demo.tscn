@@ -46,6 +46,7 @@ resize_cell_x = 1
 resize_cell_y = 1
 foregound_default = Color( 1, 1, 1, 1 )
 background_default = Color( 0, 0, 0, 1 )
+default_char = " "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 
