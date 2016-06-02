@@ -22,7 +22,7 @@ func _init(size_c_r, fg, bg, empty_char):
 func index(point):
 	var column = point.x
 	var row = point.y
-	return ((row-1) * size.width) + (column - 1)
+	return row * size.width + column
 	
 func transfer_from(buffer):
 	for y in range(1, buffer.size.y + 1):
