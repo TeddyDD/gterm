@@ -44,7 +44,19 @@ func _ready():
 	update()
 
 func _draw():
+	# draw background
 	draw_rect(get_rect(), background_default)
+	# draw letters and boxes
+	for y in range(grid.height):
+		for x in range(grid.width):
+			var i = buffer.index(Vector2(x,y))
+			
+			# draw text
+			var font_pos = Vector2()
+			font_pos.x = (x * cell.width) + font_x_offset
+			font_pos.y = ((y + 1) * cell.height) + font_y_offset
+			draw_char( font, font_pos, buffer.chars[i], "W", buffer.fgcolors[i])
+			
 
 # Calculate the grid size. Final result depens of font size
 func calculate_size():
