@@ -24,6 +24,9 @@ func index(point):
 	var row = point.y
 	return row * size.width + column
 	
+func get_size():
+	return size.x * size.y
+
 func transfer_from(buffer):
 	for y in range(1, buffer.size.y + 1):
 		if y <= size.y:
