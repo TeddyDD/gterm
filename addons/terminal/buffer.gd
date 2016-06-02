@@ -28,14 +28,16 @@ func get_size():
 	return size.x * size.y
 
 func transfer_from(buffer):
-	for y in range(1, buffer.size.y + 1):
-		if y <= size.y:
-			for x in range(1, buffer.size.x + 1):
-				if x <= size.x:
-					var i = index(Vector2(x,y))
-					chars[i] = buffer.chars[i]
-					fgcolors[i] = buffer.fgcolors[i]
-					bgcolors[i] = buffer.bgcolors[i]
+	for y in range(size.height):
+		if y < buffer.size.height:
+				for x in range(size.width):
+					if x < buffer.size.width:
+						var i = index(Vector2(x,y)) # new
+						var j = buffer.index(Vector2(x,y)) # old
+						# new      # old
+						chars[i]    = buffer.chars[j]
+						fgcolors[i] = buffer.fgcolors[j]
+						bgcolors[i] = buffer.bgcolors[j]
 
 func set_default(c, fg, bg):
 	# resize buffers
