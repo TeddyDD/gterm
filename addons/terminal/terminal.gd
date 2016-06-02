@@ -57,6 +57,12 @@ func _draw():
 			font_pos.y = ((y + 1) * cell.height) + font_y_offset
 			draw_char( font, font_pos, buffer.chars[i], "W", buffer.fgcolors[i])
 			
+# terminal api
+# call this functions and then update()
+
+# Set character in given cell
+func write_char(x, y, char):
+	buffer.chars[buffer.index(Vector2(x, y))] = char
 
 # Calculate the grid size. Final result depens of font size
 func calculate_size():
