@@ -59,10 +59,6 @@ func calculate_size():
 	grid.width = ( width - (int(width) % int(cell.width)) ) / cell.width
 	grid.height = ( height - (int(height) % int(cell.height)) ) / cell.height
 
-func get_minimum_size(): # override
-	# TODO
-	return Vector2(100,100)
-
 # Call manually when changed font size
 func _on_resize(): # signal
 	if ready:
