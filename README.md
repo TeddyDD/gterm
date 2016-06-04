@@ -10,7 +10,7 @@ This is simple terminal emulator like control for Godot engine. It might be usef
 - game when you have to interact with computers
 - editor plugins
 - cheat/debug console
-- think of something himself
+- think of something yourself
 
 ## Screenshot
 Screenshot of `demo.tscn`
