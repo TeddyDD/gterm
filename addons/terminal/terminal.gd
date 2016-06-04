@@ -38,7 +38,6 @@ func _ready():
 	assert(font != null)
 
 	calculate_size()
-	prints(grid)
 	buffer = Buffer.new(grid,foregound_default,background_default, default_char)
 	ready = true
 	update()
@@ -72,7 +71,6 @@ func write_char(x, y, char):
 # If fg or bg == null then color will be intact
 func write_color(x, y, fg, bg):
 	if fg != null:
-		prints("NULL")
 		buffer.fgcolors[buffer.index(Vector2(x, y))] = fg
 	if bg != null:
 		buffer.bgcolors[buffer.index(Vector2(x, y))] = bg
@@ -86,8 +84,6 @@ func calculate_size():
 	
 	cell.width = int(font.get_string_size("W").width) + resize_cell_x
 	cell.height = int(font.get_height()) + resize_cell_y
-	prints("Width",font.get_string_size("W").width)
-	prints("Height",font.get_height())
 	
 	grid.width = ( width - (int(width) % int(cell.width)) ) / cell.width
 	grid.height = ( height - (int(height) % int(cell.height)) ) / cell.height
@@ -96,7 +92,7 @@ func calculate_size():
 func _on_resize(): # signal
 	if ready:
 		var old_grid = grid
-		prints("Size ",get_size())
+
 		if font != null:
 			calculate_size()
 		if grid.x > 0 and grid.y > 0 and old_grid != grid:
