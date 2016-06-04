@@ -51,6 +51,10 @@ func _draw():
 		for x in range(grid.width):
 			var i = buffer.index(Vector2(x,y))
 			
+			# draw bg
+			var bg_rect = Rect2(x * cell.width, y * cell.height, cell.width, cell.height)
+			draw_rect(bg_rect, buffer.bgcolors[i])
+			
 			# draw text
 			var font_pos = Vector2()
 			font_pos.x = (x * cell.width) + font_x_offset
