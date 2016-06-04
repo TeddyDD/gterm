@@ -24,6 +24,7 @@ func _on_enter_pressed():
 		if cursor.y >= terminal.grid.height:
 			cursor = Vector2(0,0)
 		# write char using terminal api (they are set in buffer but not drawn yet)
+		terminal.write_color(cursor.x, cursor.y, fg_picker.get_color(), bg_picker.get_color())
 		terminal.write_char(cursor.x, cursor.y, string[i])
 		cursor.x += 1
 	
