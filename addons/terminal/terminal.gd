@@ -8,14 +8,14 @@ export(int) var min_rows = 1
 export (DynamicFont) var dynamicFont
 
 # offset of characters in cells
-export(int) var font_x_offset = 0
-export(int) var font_y_offset = 0
+export(float) var font_x_offset = 0
+export(float) var font_y_offset = 0
 
 # change the size of cells
 # The size of the cells is calculated based on size of "W" character
 # These properties allow you to change the margin of characters
-export(int) var resize_cell_x = 0
-export(int) var resize_cell_y = 0
+export(float) var resize_cell_x = 1
+export(float) var resize_cell_y = 1
 
 
 export(Color, RGB) var foregound_default  # default text color
@@ -56,8 +56,8 @@ func _draw():
 			
 			# draw text
 			var font_pos = Vector2()
-			font_pos.x = (x * cell.width) + font_x_offset
-			font_pos.y = ((y + 1) * cell.height) + font_y_offset
+			font_pos.x = (x * cell.width) + (cell.width * font_x_offset)
+			font_pos.y = ((y + 1) * cell.height) + (cell.height * font_y_offset)
 			draw_char( font, font_pos, buffer.chars[i], "W", buffer.fgcolors[i])
 			
 # terminal api
@@ -82,8 +82,8 @@ func calculate_size():
 	var width = get_size().width
 	var height = get_size().height
 	
-	cell.width = int(font.get_string_size("W").width) + resize_cell_x
-	cell.height = int(font.get_height()) + resize_cell_y
+	cell.width = int(font.get_string_size("W").width * resize_cell_x ) 
+	cell.height = int(font.get_height() * resize_cell_y )
 	
 	grid.width = ( width - (int(width) % int(cell.width)) ) / cell.width
 	grid.height = ( height - (int(height) % int(cell.height)) ) / cell.height
