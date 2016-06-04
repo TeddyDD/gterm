@@ -92,9 +92,7 @@ func calculate_size():
 func _on_resize(): # signal
 	if ready:
 		var old_grid = grid
-
-		if font != null:
-			calculate_size()
+		calculate_size()
 		if grid.x > 0 and grid.y > 0 and old_grid != grid:
 			var b = Buffer.new(grid,foregound_default,background_default, default_char)
 			b.transfer_from(buffer)
