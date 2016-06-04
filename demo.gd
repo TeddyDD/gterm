@@ -39,3 +39,16 @@ func _on_enter_pressed():
 func _on_LineEdit_text_entered( text ):
 	_on_enter_pressed()
 	get_node("VBoxContainer/HBoxContainer/LineEdit").set_text("")
+
+func resize_font(size):
+	var new_size = terminal.font.get_size() + size
+	terminal.font.set_size(new_size)
+	terminal._on_resize()
+
+# font+ button
+func _on_font_plus_pressed():
+	resize_font(1)
+
+# font- button
+func _on_font_minus_pressed():
+	resize_font(-1)

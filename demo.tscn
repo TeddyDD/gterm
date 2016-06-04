@@ -180,6 +180,10 @@ flat = false
 color = Color( 1, 1, 1, 1 )
 edit_alpha = true
 
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/font_plus" to="." method="_on_font_plus_pressed"]
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/font_minus" to="." method="_on_font_minus_pressed"]
+
 [connection signal="text_entered" from="VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/enter" to="." method="_on_enter_pressed"]
