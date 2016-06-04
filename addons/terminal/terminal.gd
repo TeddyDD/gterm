@@ -67,6 +67,12 @@ func _draw():
 # Set character in given cell
 func write_char(x, y, char):
 	buffer.chars[buffer.index(Vector2(x, y))] = char
+	
+# Set colors of given cell
+func write_color(x, y, fg, bg):
+	buffer.fgcolors[buffer.index(Vector2(x, y))] = fg
+	buffer.bgcolors[buffer.index(Vector2(x, y))] = bg
+	
 
 # Calculate the grid size. Final result depens of font size
 func calculate_size():
