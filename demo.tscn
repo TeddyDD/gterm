@@ -38,12 +38,12 @@ anchor/right = 0
 anchor/bottom = 0
 size_flags/vertical = 3
 margin/right = 1004.0
-margin/bottom = 557.0
+margin/bottom = 553.0
 dynamicFont = ExtResource( 2 )
-font_x_offset = 1
-font_y_offset = 1
-resize_cell_x = 1
-resize_cell_y = 1
+font_x_offset = 2
+font_y_offset = -3
+resize_cell_x = 5
+resize_cell_y = 5
 foregound_default = Color( 1, 1, 1, 1 )
 background_default = Color( 0, 0, 0, 1 )
 default_char = " "
@@ -60,7 +60,7 @@ margin/right = 1004.0
 margin/bottom = 580.0
 alignment = 0
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="font_plus" type="Button" parent="VBoxContainer/HBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -68,24 +68,24 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 43.0
-margin/bottom = 19.0
+margin/right = 45.0
+margin/bottom = 23.0
 toggle_mode = false
-text = "test1"
+text = "font +"
 flat = false
 
-[node name="Button1" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="font_minus" type="Button" parent="VBoxContainer/HBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 47.0
+margin/left = 49.0
 margin/top = 0.0
-margin/right = 90.0
-margin/bottom = 19.0
+margin/right = 91.0
+margin/bottom = 23.0
 toggle_mode = false
-text = "test2"
+text = "font -"
 flat = false
 
 [node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer"]
@@ -94,10 +94,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 94.0
+margin/left = 95.0
 margin/top = 0.0
-margin/right = 137.0
-margin/bottom = 19.0
+margin/right = 138.0
+margin/bottom = 23.0
 toggle_mode = false
 text = "test3"
 flat = false
@@ -108,26 +108,74 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 141.0
+margin/left = 142.0
 margin/top = 0.0
-margin/right = 184.0
-margin/bottom = 19.0
+margin/right = 185.0
+margin/bottom = 23.0
 toggle_mode = false
 text = "test4"
 flat = false
 
-[node name="Button4" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+
+rect/min_size = Vector2( 200, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 189.0
+margin/top = 0.0
+margin/right = 389.0
+margin/bottom = 23.0
+
+[node name="enter" type="Button" parent="VBoxContainer/HBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 188.0
+margin/left = 393.0
 margin/top = 0.0
-margin/right = 231.0
-margin/bottom = 19.0
+margin/right = 435.0
+margin/bottom = 23.0
 toggle_mode = false
-text = "test5"
+text = "enter"
 flat = false
+
+[node name="fg_color" type="ColorPickerButton" parent="VBoxContainer/HBoxContainer"]
+
+anchor/top = 3
+anchor/bottom = 3
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 439.0
+margin/top = 11.5
+margin/right = 485.0
+margin/bottom = -11.5
+toggle_mode = false
+text = "fg"
+flat = false
+color = Color( 1, 1, 1, 1 )
+edit_alpha = true
+
+[node name="bg_color" type="ColorPickerButton" parent="VBoxContainer/HBoxContainer"]
+
+anchor/top = 3
+anchor/bottom = 3
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 490.0
+margin/top = 11.5
+margin/right = 536.0
+margin/bottom = -11.5
+toggle_mode = false
+text = "fg"
+flat = false
+color = Color( 1, 1, 1, 1 )
+edit_alpha = true
 
 
