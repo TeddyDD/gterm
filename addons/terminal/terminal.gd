@@ -69,9 +69,13 @@ func write_char(x, y, char):
 	buffer.chars[buffer.index(Vector2(x, y))] = char
 	
 # Set colors of given cell
+# If fg or bg == null then color will be intact
 func write_color(x, y, fg, bg):
-	buffer.fgcolors[buffer.index(Vector2(x, y))] = fg
-	buffer.bgcolors[buffer.index(Vector2(x, y))] = bg
+	if fg != null:
+		prints("NULL")
+		buffer.fgcolors[buffer.index(Vector2(x, y))] = fg
+	if bg != null:
+		buffer.bgcolors[buffer.index(Vector2(x, y))] = bg
 	
 
 # Calculate the grid size. Final result depens of font size
