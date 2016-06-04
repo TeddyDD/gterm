@@ -73,6 +73,8 @@ margin/top = 0.0
 margin/right = 45.0
 margin/bottom = 23.0
 toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
 text = "font +"
 flat = false
 
@@ -87,6 +89,8 @@ margin/top = 0.0
 margin/right = 91.0
 margin/bottom = 23.0
 toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
 text = "font -"
 flat = false
 
@@ -101,6 +105,8 @@ margin/top = 0.0
 margin/right = 138.0
 margin/bottom = 23.0
 toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
 text = "test3"
 flat = false
 
@@ -115,6 +121,8 @@ margin/top = 0.0
 margin/right = 185.0
 margin/bottom = 23.0
 toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
 text = "test4"
 flat = false
 
@@ -129,6 +137,7 @@ margin/left = 189.0
 margin/top = 0.0
 margin/right = 389.0
 margin/bottom = 23.0
+focus_mode = 2
 
 [node name="enter" type="Button" parent="VBoxContainer/HBoxContainer"]
 
@@ -141,22 +150,24 @@ margin/top = 0.0
 margin/right = 435.0
 margin/bottom = 23.0
 toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
 text = "enter"
 flat = false
 
 [node name="fg_color" type="ColorPickerButton" parent="VBoxContainer/HBoxContainer"]
 
-anchor/top = 3
-anchor/bottom = 3
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 439.0
-margin/top = 11.5
-margin/right = 485.0
-margin/bottom = -11.5
+margin/top = 0.0
+margin/right = 462.0
+margin/bottom = 23.0
 toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
 text = "fg"
 flat = false
 color = Color( 1, 1, 1, 1 )
@@ -164,17 +175,17 @@ edit_alpha = true
 
 [node name="bg_color" type="ColorPickerButton" parent="VBoxContainer/HBoxContainer"]
 
-anchor/top = 3
-anchor/bottom = 3
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 490.0
-margin/top = 11.5
-margin/right = 536.0
-margin/bottom = -11.5
+margin/left = 466.0
+margin/top = 0.0
+margin/right = 489.0
+margin/bottom = 23.0
 toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
 text = "fg"
 flat = false
 color = Color( 1, 1, 1, 1 )
