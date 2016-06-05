@@ -13,7 +13,7 @@ This is simple terminal emulator like control for Godot engine. It might be usef
 - think of something yourself
 
 ## Screenshot
-Screenshot of `demo.tscn`
+Screenshot of `demo.tscn` | [Gif - Input](https://66.media.tumblr.com/ef38b961962ef316956a4a343f527564/tumblr_o8atshfiyx1ujs4h9o1_540.gif) | [Gif - Font resize](https://67.media.tumblr.com/3e736bab172592e20dab24242f01aeee/tumblr_o8atshfiyx1ujs4h9o2_540.gif) | [Gif - Terminal resize](https://67.media.tumblr.com/7fef07c7d04fa20b50c880962bb2a45b/tumblr_o8atshfiyx1ujs4h9o3_540.gif)
 
 ![Screenshot of demo scene](https://cloud.githubusercontent.com/assets/4397533/15800472/28877386-2a7b-11e6-8b11-e4c2dc4003d0.png)
 
