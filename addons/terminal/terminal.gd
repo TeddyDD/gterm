@@ -65,6 +65,9 @@ func _draw():
 
 # Set character in given cell
 func write_char(x, y, char):
+	check_bounds(x, y)
+	assert(char.length() == 1) # this function can take only one char
+	
 	buffer.chars[buffer.index(Vector2(x, y))] = char
 	
 # Set colors of given cell
