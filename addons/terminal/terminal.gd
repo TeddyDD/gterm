@@ -76,6 +76,11 @@ func write_color(x, y, fg, bg):
 		buffer.bgcolors[buffer.index(Vector2(x, y))] = bg
 	
 
+# Helper function that ensures drawing in bounds of buffer
+func check_bounds(x, y):
+	assert(x >= 0 and x <= grid.x - 1)
+	assert(y >= 0 and y <= grid.y - 1)
+
 # Calculate the grid size. Final result depens of font size
 func calculate_size():
 	
