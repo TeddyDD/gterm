@@ -36,7 +36,7 @@ To install these, copy `terminal` to a folder `addons/`
 inside your projects, like this `addons/terminal`
 
 and then activate it in `Scene > Project Settings > Plugins`
-Now you can create terminal control from `Create new Node menu`. **Not working yet**
+Now you can create terminal control from `Create new Node menu`.
 
 **OR** instance `terminal.tscn` somewhere in your scene.
 
