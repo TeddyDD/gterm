@@ -73,6 +73,10 @@ func write_char(x, y, char):
 # Set colors of given cell
 # If fg or bg == null then color will be intact
 func write_color(x, y, fg, bg):
+	check_bounds(x, y)
+	# only one parameter can be null
+	assert(fg != null or bg != null) 
+	
 	if fg != null:
 		buffer.fgcolors[buffer.index(Vector2(x, y))] = fg
 	if bg != null:
