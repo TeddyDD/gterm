@@ -31,18 +31,14 @@ var cell = Vector2() # cell size in pixels
 var Buffer = preload("res://addons/terminal/buffer.gd")
 var buffer
 
-var ready = false
-
 func _ready():
 	font = dynamicFont
 	assert(font != null)
-
+	
 	calculate_size()
 	buffer = Buffer.new(grid,foregound_default,background_default, default_char)
-	ready = true
 	
 	connect("resized", self, "_on_resize")
-	
 	update()
 
 func _draw():
@@ -105,11 +101,10 @@ func calculate_size():
 
 # Call manually when changed font size
 func _on_resize(): # signal
-	if ready:
-		var old_grid = grid
-		calculate_size()
-		if grid.x > 0 and grid.y > 0 and old_grid != grid:
-			var b = Buffer.new(grid,foregound_default,background_default, default_char)
-			b.transfer_from(buffer)
-			buffer = b
+	var old_grid = grid
+	calculate_size()
+	if grid.x > 0 and grid.y > 0 and old_grid != grid:
+		var b = Buffer.new(grid,foregound_default,background_default, default_char)
+		b.transfer_from(buffer)
+		buffer = b
 	update()
