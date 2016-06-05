@@ -25,6 +25,4 @@ resize_cell_y = 0
 foregound_default = null
 background_default = null
 
-[connection signal="resized" from="." to="." method="_on_resize"]
-
 
