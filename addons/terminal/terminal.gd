@@ -81,6 +81,10 @@ func write_color(x, y, fg, bg):
 	if bg != null:
 		buffer.bgcolors[buffer.index(Vector2(x, y))] = bg
 	
+# Clean screen with given params
+func write_all(c, fg, bg):
+	assert(c != null and fg != null and bg != null)
+	buffer.set_default(c, fg, bg)
 
 # Helper function that ensures drawing in bounds of buffer
 func check_bounds(x, y):
