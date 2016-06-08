@@ -15,22 +15,13 @@ func _ready():
 # Enter button
 func _on_enter_pressed():
 	var string = get_node("VBoxContainer/HBoxContainer/LineEdit").get_text()
-	for i in range(string.length()):
-		# wrap lines
-		if cursor.x >= terminal.grid.width:
-			cursor.y += 1
-			cursor.x = 0
-		# go back to first line (no scrolling yet)
-		if cursor.y >= terminal.grid.height:
-			cursor = Vector2(0,0)
-		# write char using terminal api (they are set in buffer but not drawn yet)
-		terminal.write_color(cursor.x, cursor.y, fg_picker.get_color(), bg_picker.get_color())
-		terminal.write_char(cursor.x, cursor.y, string[i])
-		cursor.x += 1
+	cursor = terminal.write_string(cursor.x, cursor.y, string, fg_picker.get_color(), bg_picker.get_color())
 	
 	# go to begginig of next line
 	cursor.x = 0
 	cursor.y += 1
+	if cursor.y >= terminal.grid.y - 1:
+		cursor.y = 0
 	
 	# redraw terminal 
 	terminal.update()
