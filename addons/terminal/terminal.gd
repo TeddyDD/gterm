@@ -80,7 +80,34 @@ func write_color(x, y, fg, bg):
 		buffer.fgcolors[buffer.index(Vector2(x, y))] = fg
 	if bg != null:
 		buffer.bgcolors[buffer.index(Vector2(x, y))] = bg
+
+# Write string in given postion. fg and bg can be null.
+# This method use simple line wrapping. 
+# Returns postion of last cell of string (Vector2)
+func write_string(x, y, string, fg, bg):
+	check_bounds(x,y)
+	assert(string != null)
 	
+	var cursor = Vector2(x, y)
+	for l in range(string.length()):
+		var i = buffer.index(Vector2(cursor.x, cursor.y))
+		var char = string[l]
+		buffer.chars[i] = char
+		if fg != null:
+			buffer.fgcolors[i] = fg
+		if bg != null:
+			buffer.bgcolors[i] = bg
+		# wrap lines
+		if cursor.x >= grid.width:
+			cursor.y += 1
+			cursor.x = 0
+		elif cursor.y >= grid.height:
+			cursor.y = grid.height - 1
+			return cursor
+		else:
+			cursor.x += 1
+	return cursor
+
 # Clean screen with given params
 func write_all(c, fg, bg):
 	assert(c != null and fg != null and bg != null)
