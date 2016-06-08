@@ -91,8 +91,8 @@ func write_string(x, y, string, fg, bg):
 	var cursor = Vector2(x, y)
 	for l in range(string.length()):
 		var i = buffer.index(Vector2(cursor.x, cursor.y))
-		var char = string[l]
-		buffer.chars[i] = char
+		var c = string[l]
+		buffer.chars[i] = c
 		if fg != null:
 			buffer.fgcolors[i] = fg
 		if bg != null:
