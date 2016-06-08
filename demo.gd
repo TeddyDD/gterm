@@ -52,3 +52,11 @@ func _on_font_plus_pressed():
 # font- button
 func _on_font_minus_pressed():
 	resize_font(-1)
+
+
+func _on_clean_pressed():
+	var c = get_node("VBoxContainer/HBoxContainer/LineEdit").get_text()
+	c = c.left(1)
+	cursor = Vector2()
+	terminal.write_all(c, fg_picker.get_color(), bg_picker.get_color())
+	terminal.update()

@@ -110,22 +110,6 @@ shortcut = null
 text = "test3"
 flat = false
 
-[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 142.0
-margin/top = 0.0
-margin/right = 185.0
-margin/bottom = 23.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-text = "test4"
-flat = false
-
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
 
 rect/min_size = Vector2( 200, 0 )
@@ -133,9 +117,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 189.0
+margin/left = 142.0
 margin/top = 0.0
-margin/right = 389.0
+margin/right = 342.0
 margin/bottom = 23.0
 focus_mode = 2
 
@@ -145,9 +129,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 393.0
+margin/left = 346.0
 margin/top = 0.0
-margin/right = 435.0
+margin/right = 388.0
 margin/bottom = 23.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -161,9 +145,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 439.0
+margin/left = 392.0
 margin/top = 0.0
-margin/right = 462.0
+margin/right = 415.0
 margin/bottom = 23.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -179,9 +163,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 466.0
+margin/left = 419.0
 margin/top = 0.0
-margin/right = 489.0
+margin/right = 442.0
 margin/bottom = 23.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -191,6 +175,22 @@ flat = false
 color = Color( 1, 1, 1, 1 )
 edit_alpha = true
 
+[node name="clean" type="Button" parent="VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 446.0
+margin/top = 0.0
+margin/right = 489.0
+margin/bottom = 23.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "clean"
+flat = false
+
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/font_plus" to="." method="_on_font_plus_pressed"]
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/font_minus" to="." method="_on_font_minus_pressed"]
@@ -198,5 +198,7 @@ edit_alpha = true
 [connection signal="text_entered" from="VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/enter" to="." method="_on_enter_pressed"]
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/clean" to="." method="_on_clean_pressed"]
 
 
