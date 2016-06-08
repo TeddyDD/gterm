@@ -108,6 +108,22 @@ func write_string(x, y, string, fg, bg):
 			cursor.x += 1
 	return cursor
 
+# draw rectangle with given parameters
+# c, fg and bg can be null
+func write_rect(rect,c,fg,bg):
+	check_bounds(rect.pos.x, rect.pos.y)
+	check_bounds(rect.end.x, rect.end.y)
+	
+	for y in range(rect.size.y):
+		for x in range(rect.size.x):
+			var i = buffer.index(Vector2(x + rect.pos.x, y + rect.pos.y))
+			if c != null:
+				buffer.chars[i] = c
+			if fg != null:
+				buffer.fgcolors[i] = fg
+			if bg != null:
+				buffer.bgcolors[i] = bg
+
 # Clean screen with given params
 func write_all(c, fg, bg):
 	assert(c != null and fg != null and bg != null)
