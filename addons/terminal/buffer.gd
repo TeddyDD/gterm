@@ -8,7 +8,7 @@ var bgcolors # background colors
 
 # Create buffer of given size_c_r (Vector2D, columns, rows) and fill with default values
 # empty_char by default is " " (space)
-func _init(size_c_r, fg, bg, empty_char):
+func _init(size_c_r, fg, bg, empty_char=" "):
 	size = size_c_r
 		# initialize arrays
 	chars = []
