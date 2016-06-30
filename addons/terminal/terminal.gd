@@ -71,7 +71,7 @@ func write_char(x, y, char):
 	
 # Set colors of given cell
 # If fg or bg == null then color will be intact
-func write_color(x, y, fg, bg):
+func write_color(x, y, fg=null, bg=null):
 	check_bounds(x, y)
 	# only one parameter can be null
 	assert(fg != null or bg != null) 
@@ -84,7 +84,7 @@ func write_color(x, y, fg, bg):
 # Write string in given postion. fg and bg can be null.
 # This method use simple line wrapping. 
 # Returns postion of last cell of string (Vector2)
-func write_string(x, y, string, fg, bg):
+func write_string(x, y, string, fg=null, bg=null):
 	check_bounds(x,y)
 	assert(string != null)
 	
@@ -110,7 +110,7 @@ func write_string(x, y, string, fg, bg):
 
 # draw rectangle with given parameters
 # c, fg and bg can be null
-func write_rect(rect,c,fg,bg):
+func write_rect(rect,c=null,fg=null,bg=null):
 	check_bounds(rect.pos.x, rect.pos.y)
 	check_bounds(rect.end.x, rect.end.y)
 	
