@@ -1,6 +1,6 @@
 [gd_resource type="DynamicFont" load_steps=2 format=1]
 
-[ext_resource path="res://fonts/Inconsolata.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://fonts/UbuntuMono-Regular.ttf" type="DynamicFontData" id=1]
 
 [resource]
 
