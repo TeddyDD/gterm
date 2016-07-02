@@ -8,7 +8,23 @@ onready var terminal = get_node("VBoxContainer/Terminal")
 onready var fg_picker = get_node("VBoxContainer/HBoxContainer/fg_color")
 onready var bg_picker = get_node("VBoxContainer/HBoxContainer/bg_color")
 
+# font selector
+onready var font_select = get_node("VBoxContainer/HBoxContainer/font_style")
+
 func _ready():
+	# load additional fonts
+	terminal.add_font(preload("res://fonts/Ubuntu_mono_bold.tres"))
+	terminal.add_font(preload("res://fonts/Ubuntu_mono_italic.tres"))
+	terminal.add_font(preload("res://fonts/Ubuntu_mono_italic_bold.tres"))
+	terminal._on_resize()
+	
+	# add menu items for fonts
+	font_select.add_item("Normal", 0)
+	font_select.add_item("Bold", 1)
+	font_select.add_item("Italic", 2)
+	font_select.add_item("Bold Italic", 3)
+	font_select.select(0)
+	
 	fg_picker.set_color(terminal.foregound_default)
 	bg_picker.set_color(terminal.background_default)
 
@@ -32,8 +48,7 @@ func _on_LineEdit_text_entered( text ):
 	get_node("VBoxContainer/HBoxContainer/LineEdit").set_text("")
 
 func resize_font(size):
-	var new_size = terminal.font.get_size() + size
-	terminal.font.set_size(new_size)
+	terminal.resize_fonts(size)
 	terminal._on_resize()
 
 # font+ button
@@ -51,3 +66,6 @@ func _on_clean_pressed():
 	cursor = Vector2()
 	terminal.write_all(c, fg_picker.get_color(), bg_picker.get_color())
 	terminal.update()
+
+func _on_font_style_item_selected( ID ):
+	terminal.font = ID

@@ -191,6 +191,26 @@ shortcut = null
 text = "clean"
 flat = false
 
+[node name="font_style" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+
+rect/min_size = Vector2( 120, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 510.0
+margin/top = 0.0
+margin/right = 630.0
+margin/bottom = 24.0
+toggle_mode = false
+click_on_press = true
+enabled_focus_mode = 0
+shortcut = null
+flat = true
+align = 0
+selected = -1
+items = [  ]
+
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/font_plus" to="." method="_on_font_plus_pressed"]
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/font_minus" to="." method="_on_font_minus_pressed"]
@@ -200,5 +220,7 @@ flat = false
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/enter" to="." method="_on_enter_pressed"]
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/clean" to="." method="_on_clean_pressed"]
+
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/font_style" to="." method="_on_font_style_item_selected"]
 
 
