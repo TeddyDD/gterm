@@ -8,6 +8,7 @@ export(int) var min_rows = 1
 # default font
 export (DynamicFont) var dynamicFont
 
+
 # offset of characters in cells
 export(float) var font_x_offset = 0
 export(float) var font_y_offset = 0
@@ -74,6 +75,11 @@ func write_char(x, y, char):
 	
 	buffer.chars[buffer.index(Vector2(x, y))] = char
 	
+# Set font in given cell
+func write_font(x, y, font_id):
+	check_bounds(x, y)
+	buffer.fonts[buffer.index(Vector2(x,y))] = font_id
+	
 # Set colors of given cell
 # If fg or bg == null then color will be intact
 func write_color(x, y, fg=null, bg=null):
@@ -89,7 +95,7 @@ func write_color(x, y, fg=null, bg=null):
 # Write string in given postion. fg and bg can be null.
 # This method use simple line wrapping. 
 # Returns postion of last cell of string (Vector2)
-func write_string(x, y, string, fg=null, bg=null):
+func write_string(x, y, string, fg=null, bg=null, font_id=font):
 	check_bounds(x,y)
 	assert(string != null)
 	
@@ -98,6 +104,7 @@ func write_string(x, y, string, fg=null, bg=null):
 		var i = buffer.index(Vector2(cursor.x, cursor.y))
 		var c = string[l]
 		buffer.chars[i] = c
+		buffer.fonts[i] = font_id
 		if fg != null:
 			buffer.fgcolors[i] = fg
 		if bg != null:
@@ -115,7 +122,7 @@ func write_string(x, y, string, fg=null, bg=null):
 
 # draw rectangle with given parameters
 # c, fg and bg can be null
-func write_rect(rect,c=null,fg=null,bg=null):
+func write_rect(rect,c=null,fg=null,bg=null, font_id=null):
 	check_bounds(rect.pos.x, rect.pos.y)
 	check_bounds(rect.end.x, rect.end.y)
 	
@@ -128,11 +135,13 @@ func write_rect(rect,c=null,fg=null,bg=null):
 				buffer.fgcolors[i] = fg
 			if bg != null:
 				buffer.bgcolors[i] = bg
+			if font_id != null:
+				buffer.fonts[i] = font_id
 
 # Clean screen with given params
-func write_all(c, fg, bg):
+func write_all(c=default_char, fg=foregound_default, bg=background_default, font_id=font):
 	assert(c != null and fg != null and bg != null)
-	buffer.set_default(c, fg, bg)
+	buffer.set_default(c, fg, bg, font_id)
 
 # Helper function that ensures drawing in bounds of buffer
 func check_bounds(x, y):
