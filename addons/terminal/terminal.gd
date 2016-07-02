@@ -5,6 +5,7 @@ extends Control
 export(int) var min_columns = 1
 export(int) var min_rows = 1
 
+# default font
 export (DynamicFont) var dynamicFont
 
 # offset of characters in cells
@@ -23,7 +24,11 @@ export(Color, RGBA) var background_default # default background color
 export var default_char = " " # one char
 
 # private variables
-var font
+# avaliable dynamic fonts - size of cell is based on biggest font
+# 0 is usually default font
+var fonts = []
+# default font id
+var font = 0
 
 var grid = Vector2() # rows and collumns
 var cell = Vector2() # cell size in pixels
@@ -32,11 +37,11 @@ var Buffer = preload("res://addons/terminal/buffer.gd")
 var buffer
 
 func _ready():
-	font = dynamicFont
-	assert(font != null)
+	# add default font and calculate size
+	font = add_font(dynamicFont)
+	assert(fonts != null)
 	
-	calculate_size()
-	buffer = Buffer.new(grid,foregound_default,background_default, default_char)
+	buffer = Buffer.new(grid,foregound_default,background_default, default_char, font)
 	
 	connect("resized", self, "_on_resize")
 	update()
@@ -57,7 +62,7 @@ func _draw():
 			var font_pos = Vector2()
 			font_pos.x = (x * cell.width) + (cell.width * font_x_offset)
 			font_pos.y = ((y + 1) * cell.height) + (cell.height * font_y_offset)
-			draw_char( font, font_pos, buffer.chars[i], "W", buffer.fgcolors[i])
+			draw_char( fonts[buffer.fonts[i]], font_pos, buffer.chars[i], "W", buffer.fgcolors[i])
 			
 # terminal api
 # call this functions and then update()
@@ -133,18 +138,39 @@ func write_all(c, fg, bg):
 func check_bounds(x, y):
 	assert(x >= 0 and x <= grid.x - 1)
 	assert(y >= 0 and y <= grid.y - 1)
+	
+# add font to fonts array and calulate size
+func add_font(f):
+	assert(f.get_type() == "DynamicFont")
+	fonts.append(f)
+	calculate_size()
+	# return id of added font
+	return fonts.size() - 1
 
 # Calculate the grid size. Final result depens of font size
 func calculate_size():
 	
 	var width = get_size().width
 	var height = get_size().height
-	
-	cell.width = int(font.get_string_size("W").width * resize_cell_x ) 
-	cell.height = int(font.get_height() * resize_cell_y )
+
+	# Get size of biggest font
+	# prevous max cell size
+	var c = Vector2() 
+	for f in fonts:
+		cell.width = max( int(f.get_string_size("W").width * resize_cell_x ), c.width)
+		cell.height = max( int(f.get_height() * resize_cell_y ), c.height)
+		# I want a copy, not reference
+		c = cell + Vector2(0,0) 
 	
 	grid.width = ( width - (int(width) % int(cell.width)) ) / cell.width
 	grid.height = ( height - (int(height) % int(cell.height)) ) / cell.height
+
+# resize all fonts
+func resize_fonts(delta):
+	for f in fonts:
+		var new_size = f.get_size() + delta
+		f.set_size(new_size)
+
 
 # Call manually when changed font size
 func _on_resize(): # signal
@@ -155,3 +181,6 @@ func _on_resize(): # signal
 		b.transfer_from(buffer)
 		buffer = b
 	update()
+	
+
+
