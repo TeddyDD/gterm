@@ -1,4 +1,4 @@
-
+tool
 extends Control
 
 # export variables
@@ -20,8 +20,8 @@ export(float) var resize_cell_x = 1
 export(float) var resize_cell_y = 1
 
 
-export(Color, RGBA) var foregound_default  # default text color
-export(Color, RGBA) var background_default # default background color
+export(Color, RGBA) var foregound_default = Color("ffffff")  # default text color
+export(Color, RGBA) var background_default = Color("000000") # default background color
 export var default_char = " " # one char
 
 # private variables

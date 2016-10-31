@@ -20,9 +20,10 @@ min_rows = 1
 dynamicFont = null
 font_x_offset = 0
 font_y_offset = 0
-resize_cell_x = 0
-resize_cell_y = 0
-foregound_default = null
+resize_cell_x = 1
+resize_cell_y = 1
+foregound_default = Color( 1, 1, 1, 1 )
 background_default = null
+default_char = " "
 
 
