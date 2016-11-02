@@ -2,8 +2,6 @@ tool
 extends Control
 
 # export variables
-export(int) var min_columns = 1
-export(int) var min_rows = 1
 
 # default font
 export (DynamicFont) var dynamicFont
