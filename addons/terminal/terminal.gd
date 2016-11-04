@@ -53,7 +53,7 @@ func _ready():
 
 func _draw():
 	# draw background
-	draw_rect(get_rect(), background_default)
+	draw_rect(get_rect(), defaultStyle.bg)
 	# draw letters and boxes
 	for y in range(grid.height):
 		for x in range(grid.width):
@@ -80,26 +80,24 @@ func write_char(x, y, char):
 	buffer.chars[buffer.index(Vector2(x, y))] = char
 	
 # Set font in given cell
-func write_font(x, y, font_id):
+func write_font(x, y, style=defaultStyle):
 	check_bounds(x, y)
-	buffer.fonts[buffer.index(Vector2(x,y))] = font_id
+	buffer.fonts[buffer.index(Vector2(x,y))] = style.font
 	
 # Set colors of given cell
 # If fg or bg == null then color will be intact
-func write_color(x, y, fg=null, bg=null):
+func write_color(x, y, style=defaultStyle):
 	check_bounds(x, y)
-	# only one parameter can be null
-	assert(fg != null or bg != null) 
 	
-	if fg != null:
-		buffer.fgcolors[buffer.index(Vector2(x, y))] = fg
-	if bg != null:
-		buffer.bgcolors[buffer.index(Vector2(x, y))] = bg
+	if style.fg != null:
+		buffer.fgcolors[buffer.index(Vector2(x, y))] = style.fg
+	if style.bg != null:
+		buffer.bgcolors[buffer.index(Vector2(x, y))] = style.bg
 
 # Write string in given postion. fg and bg can be null.
 # This method use simple line wrapping. 
 # Returns postion of last cell of string (Vector2)
-func write_string(x, y, string, fg=null, bg=null, font_id=font):
+func write_string(x, y, string, style=defaultStyle):
 	check_bounds(x,y)
 	assert(string != null)
 	
@@ -108,11 +106,12 @@ func write_string(x, y, string, fg=null, bg=null, font_id=font):
 		var i = buffer.index(Vector2(cursor.x, cursor.y))
 		var c = string[l]
 		buffer.chars[i] = c
-		buffer.fonts[i] = font_id
-		if fg != null:
-			buffer.fgcolors[i] = fg
-		if bg != null:
-			buffer.bgcolors[i] = bg
+		if style.fg != null:
+			buffer.fgcolors[i] = style.fg
+		if style.bg != null:
+			buffer.bgcolors[i] = style.bg
+		if style.font != null:
+			buffer.fonts[i] = style.font
 		# wrap lines
 		if cursor.x >= grid.width:
 			cursor.y += 1
@@ -126,7 +125,7 @@ func write_string(x, y, string, fg=null, bg=null, font_id=font):
 
 # draw rectangle with given parameters
 # c, fg and bg can be null
-func write_rect(rect,c=null,fg=null,bg=null, font_id=null):
+func write_rect(rect,c=null, style=defaultStyle):
 	check_bounds(rect.pos.x, rect.pos.y)
 	check_bounds(rect.end.x, rect.end.y)
 	
@@ -135,17 +134,17 @@ func write_rect(rect,c=null,fg=null,bg=null, font_id=null):
 			var i = buffer.index(Vector2(x + rect.pos.x, y + rect.pos.y))
 			if c != null:
 				buffer.chars[i] = c
-			if fg != null:
-				buffer.fgcolors[i] = fg
-			if bg != null:
-				buffer.bgcolors[i] = bg
-			if font_id != null:
-				buffer.fonts[i] = font_id
+			if style.fg != null:
+				buffer.fgcolors[i] = style.fg
+			if style.bg != null:
+				buffer.bgcolors[i] = style.bg
+			if style.font != null:
+				buffer.fonts[i] = style.font
 
 # Clean screen with given params
-func write_all(c=default_char, fg=foregound_default, bg=background_default, font_id=font):
-	assert(c != null and fg != null and bg != null)
-	buffer.set_default(c, fg, bg, font_id)
+func write_all(c=default_char, style=defaultStyle):
+	assert(c != null and style.fg != null and style.bg != null)
+	buffer.set_default(c, style.fg, style.bg, style.font)
 
 # Helper function that ensures drawing in bounds of buffer
 func check_bounds(x, y):
@@ -190,10 +189,11 @@ func _on_resize(): # signal
 	var old_grid = grid
 	calculate_size()
 	if grid.x > 0 and grid.y > 0 and old_grid != grid:
-		var b = Buffer.new(grid,foregound_default,background_default, default_char)
+		var b = Buffer.new(grid,defaultStyle.fg, defaultStyle.bg, default_char)
 		b.transfer_from(buffer)
 		buffer = b
 	update()
+	
 	
 
 
