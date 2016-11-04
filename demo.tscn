@@ -219,6 +219,10 @@ items = [  ]
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/enter" to="." method="_on_enter_pressed"]
 
+[connection signal="color_changed" from="VBoxContainer/HBoxContainer/fg_color" to="." method="_on_fg_color_color_changed"]
+
+[connection signal="color_changed" from="VBoxContainer/HBoxContainer/bg_color" to="." method="_on_bg_color_color_changed"]
+
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/clean" to="." method="_on_clean_pressed"]
 
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/font_style" to="." method="_on_font_style_item_selected"]

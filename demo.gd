@@ -3,6 +3,7 @@ extends Panel
 
 var cursor = Vector2(0,0)
 onready var terminal = get_node("VBoxContainer/Terminal")
+var current_style
 
 # color pickers
 onready var fg_picker = get_node("VBoxContainer/HBoxContainer/fg_color")
@@ -27,11 +28,14 @@ func _ready():
 	
 	fg_picker.set_color(terminal.foregound_default)
 	bg_picker.set_color(terminal.background_default)
+	
+	# current terminal style
+	current_style = terminal.Style.new(fg_picker.get_color(), bg_picker.get_color(), 0)
 
 # Enter button
 func _on_enter_pressed():
 	var string = get_node("VBoxContainer/HBoxContainer/LineEdit").get_text()
-	cursor = terminal.write_string(cursor.x, cursor.y, string, fg_picker.get_color(), bg_picker.get_color())
+	cursor = terminal.write_string(cursor.x, cursor.y, string, current_style)
 	
 	# go to begginig of next line
 	cursor.x = 0
@@ -64,8 +68,17 @@ func _on_clean_pressed():
 	var c = get_node("VBoxContainer/HBoxContainer/LineEdit").get_text()
 	c = c.left(1)
 	cursor = Vector2()
-	terminal.write_all(c, fg_picker.get_color(), bg_picker.get_color())
+	terminal.defaultStyle.bg = current_style.bg
+	terminal.write_all(c, current_style)
 	terminal.update()
 
 func _on_font_style_item_selected( ID ):
-	terminal.font = ID
+	current_style.font = ID
+
+
+func _on_fg_color_color_changed( color ):
+	current_style.fg = color
+
+
+func _on_bg_color_color_changed( color ):
+	current_style.bg = color
