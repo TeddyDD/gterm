@@ -26,8 +26,7 @@ export var default_char = " " # one char
 # avaliable dynamic fonts - size of cell is based on biggest font
 # 0 is usually default font
 var fonts = []
-# default font id
-var font = 0
+
 
 var grid = Vector2() # rows and collumns
 var cell = Vector2() # cell size in pixels
@@ -40,8 +39,11 @@ var buffer
 var defaultStyle
 
 func _ready():
-	# add default font and calculate size
-	font = add_font(dynamicFont)
+	# default style
+	defaultStyle = Style.new(foregound_default, background_default, 0)
+
+		# add default font and calculate size
+	defaultStyle.font = add_font(dynamicFont)
 	assert(fonts != null)
 	
 	buffer = Buffer.new(grid,foregound_default,background_default, default_char, font)
