@@ -32,8 +32,12 @@ var font = 0
 var grid = Vector2() # rows and collumns
 var cell = Vector2() # cell size in pixels
 
+# libs
 var Buffer = preload("res://addons/terminal/buffer.gd")
+var Style = preload("res://addons/terminal/TermStyle.gd")
+
 var buffer
+var defaultStyle
 
 func _ready():
 	# add default font and calculate size
