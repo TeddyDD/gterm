@@ -46,7 +46,7 @@ func _ready():
 	defaultStyle.font = add_font(dynamicFont)
 	assert(fonts != null)
 	
-	buffer = Buffer.new(grid,foregound_default,background_default, default_char, font)
+	buffer = Buffer.new(grid,defaultStyle.fg, defaultStyle.bg, default_char, defaultStyle.font)
 	
 	connect("resized", self, "_on_resize")
 	update()
