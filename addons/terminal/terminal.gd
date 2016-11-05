@@ -118,16 +118,16 @@ func write_string(x, y, string, style=defaultStyle):
 	return cursor
 
 # draw rectangle with given parameters
-# c, fg and bg can be null
-func write_rect(rect,c=null, style=defaultStyle):
+# char, fg and bg can be null
+func write_rect(rect, char=null, style=defaultStyle):
 	check_bounds(rect.pos.x, rect.pos.y)
 	check_bounds(rect.end.x, rect.end.y)
 	
 	for y in range(rect.size.y):
 		for x in range(rect.size.x):
 			var i = buffer.index(Vector2(x + rect.pos.x, y + rect.pos.y))
-			if c != null:
-				buffer.chars[i] = c
+			if char != null:
+				buffer.chars[i] = char
 			if style.fg != null:
 				buffer.fgcolors[i] = style.fg
 			if style.bg != null:
@@ -136,9 +136,9 @@ func write_rect(rect,c=null, style=defaultStyle):
 				buffer.fonts[i] = style.font
 
 # Clean screen with given params
-func write_all(c=default_char, style=defaultStyle):
-	assert(c != null and style.fg != null and style.bg != null)
-	buffer.set_default(c, style.fg, style.bg, style.font)
+func write_all(char=default_char, style=defaultStyle):
+	assert(char != null and style.fg != null and style.bg != null)
+	buffer.set_default(char, style.fg, style.bg, style.font)
 
 # Helper function that ensures drawing in bounds of buffer
 func check_bounds(x, y):
