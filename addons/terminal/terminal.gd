@@ -6,7 +6,6 @@ extends Control
 # default font
 export (DynamicFont) var dynamicFont
 
-
 # offset of characters in cells
 export(float) var font_x_offset = 0
 export(float) var font_y_offset = 0
@@ -38,39 +37,11 @@ var Style = preload("res://addons/terminal/TermStyle.gd")
 var buffer
 var defaultStyle
 
-func _ready():
-	# default style
-	defaultStyle = Style.new(foregound_default, background_default, 0)
+####################
+# Public functions #
+####################
 
-	# add default font and calculate size
-	defaultStyle.font = add_font(dynamicFont)
-	assert(fonts != null)
-	
-	buffer = Buffer.new(grid,defaultStyle.fg, defaultStyle.bg, default_char, defaultStyle.font)
-	
-	connect("resized", self, "_on_resize")
-	update()
-
-func _draw():
-	# draw background
-	draw_rect(get_rect(), defaultStyle.bg)
-	# draw letters and boxes
-	for y in range(grid.height):
-		for x in range(grid.width):
-			var i = buffer.index(Vector2(x,y))
-			
-			# draw bg
-			var bg_rect = Rect2(x * cell.width, y * cell.height, cell.width, cell.height)
-			draw_rect(bg_rect, buffer.bgcolors[i])
-			
-			# draw text
-			var font_pos = Vector2()
-			font_pos.x = (x * cell.width) + (cell.width * font_x_offset)
-			font_pos.y = ((y + 1) * cell.height) + (cell.height * font_y_offset)
-			draw_char( fonts[buffer.fonts[i]], font_pos, buffer.chars[i], "W", buffer.fgcolors[i])
-			
-# terminal api
-# call this functions and then update()
+# call this functions and then update() to redraw changes.
 
 # Write char in given postion using given style
 # any parameter can be null
@@ -140,19 +111,62 @@ func write_all(char=default_char, style=defaultStyle):
 	assert(char != null and style.fg != null and style.bg != null)
 	buffer.set_default(char, style.fg, style.bg, style.font)
 
-# Helper function that ensures drawing in bounds of buffer
-func check_bounds(x, y):
-	assert(x >= 0 and x <= grid.x - 1)
-	assert(y >= 0 and y <= grid.y - 1)
-	
 # add font to fonts array and calulate size
+# returns ID of font
 func add_font(f):
 	assert(f.get_type() == "DynamicFont")
 	fonts.append(f)
 	calculate_size()
 	# return id of added font
 	return fonts.size() - 1
+	
+# resize all fonts
+func resize_fonts(delta):
+	for f in fonts:
+		var new_size = f.get_size() + delta
+		f.set_size(new_size)
 
+#####################
+# Private functions #
+#####################
+
+func _ready():
+	# default style
+	defaultStyle = Style.new(foregound_default, background_default, 0)
+
+	# add default font and calculate size
+	defaultStyle.font = add_font(dynamicFont)
+	assert(fonts != null)
+	
+	buffer = Buffer.new(grid,defaultStyle.fg, defaultStyle.bg, default_char, defaultStyle.font)
+	
+	connect("resized", self, "_on_resize")
+	update()
+
+func _draw():
+	# draw background
+	draw_rect(get_rect(), defaultStyle.bg)
+	# draw letters and boxes
+	for y in range(grid.height):
+		for x in range(grid.width):
+			var i = buffer.index(Vector2(x,y))
+			
+			# draw bg
+			var bg_rect = Rect2(x * cell.width, y * cell.height, cell.width, cell.height)
+			draw_rect(bg_rect, buffer.bgcolors[i])
+			
+			# draw text
+			var font_pos = Vector2()
+			font_pos.x = (x * cell.width) + (cell.width * font_x_offset)
+			font_pos.y = ((y + 1) * cell.height) + (cell.height * font_y_offset)
+			draw_char( fonts[buffer.fonts[i]], font_pos, buffer.chars[i], "W", buffer.fgcolors[i])
+			
+
+# Helper function that ensures drawing in bounds of buffer
+func check_bounds(x, y):
+	assert(x >= 0 and x <= grid.x - 1)
+	assert(y >= 0 and y <= grid.y - 1)
+	
 # Calculate the grid size. Final result depens of font size
 func calculate_size():
 	
@@ -166,17 +180,10 @@ func calculate_size():
 		cell.width = max( int(f.get_string_size("W").width * resize_cell_x ), c.width)
 		cell.height = max( int(f.get_height() * resize_cell_y ), c.height)
 		# I want a copy, not reference
-		c = cell + Vector2(0,0) 
+		c = cell + Vector2(0,0)
 	
 	grid.width = ( width - (int(width) % int(cell.width)) ) / cell.width
 	grid.height = ( height - (int(height) % int(cell.height)) ) / cell.height
-
-# resize all fonts
-func resize_fonts(delta):
-	for f in fonts:
-		var new_size = f.get_size() + delta
-		f.set_size(new_size)
-
 
 # Call manually when changed font size
 func _on_resize(): # signal
@@ -189,5 +196,3 @@ func _on_resize(): # signal
 	update()
 	
 	
-
-
