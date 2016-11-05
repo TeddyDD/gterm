@@ -8,9 +8,9 @@ var bgcolors # background colors
 var fonts    # font IDs
 
 # Create buffer of given size_c_r (Vector2D, columns, rows) and fill with default values
-# empty_char by default is " " (space)
-func _init(size_c_r, fg, bg, empty_char=" ", font_id=0, set_defaults=true):
-	size = size_c_r
+# char by default is " " (space)
+func _init(size, fg, bg, char=" ", font_id=0, set_defaults=true):
+	self.size = size
 	# initialize arrays
 	chars = []
 	fgcolors = []
@@ -26,7 +26,7 @@ func _init(size_c_r, fg, bg, empty_char=" ", font_id=0, set_defaults=true):
 	fonts.resize(b)
 	
 	if set_defaults:
-		set_default(empty_char,fg,bg, font_id)
+		set_default(char,fg,bg, font_id)
 
 # returns index for given column and row
 func index(point):
@@ -50,10 +50,10 @@ func transfer_from(buffer):
 						bgcolors[i] = buffer.bgcolors[j]
 						fonts[i] = buffer.fonts[j]
 						
-func set_default(c, fg, bg, font_id):
+func set_default(char, fg, bg, font_id):
 	# set default variables
 	for item in range( get_size() ):
-		chars[item] = c
+		chars[item] = char
 		fgcolors[item] = fg
 		bgcolors[item] = bg
 		fonts[item] = font_id
