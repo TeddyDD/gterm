@@ -46,7 +46,7 @@ var defaultStyle
 # Write char in given postion using given style
 # any parameter can be null
 func write(x, y, char, style=defaultStyle):
-	check_bounds(x, y)
+	_check_bounds(x, y)
 	assert(char.length() == 1) # this function can take only one char
 	
 	if char != null:
@@ -63,7 +63,7 @@ func write(x, y, char, style=defaultStyle):
 # This method use simple line wrapping. 
 # Returns postion of last cell of string (Vector2)
 func write_string(x, y, string, style=defaultStyle):
-	check_bounds(x,y)
+	_check_bounds(x,y)
 	assert(string != null)
 	
 	var cursor = Vector2(x, y)
@@ -91,8 +91,8 @@ func write_string(x, y, string, style=defaultStyle):
 # draw rectangle with given parameters
 # char, fg and bg can be null
 func write_rect(rect, char=null, style=defaultStyle):
-	check_bounds(rect.pos.x, rect.pos.y)
-	check_bounds(rect.end.x, rect.end.y)
+	_check_bounds(rect.pos.x, rect.pos.y)
+	_check_bounds(rect.end.x, rect.end.y)
 	
 	for y in range(rect.size.y):
 		for x in range(rect.size.x):
@@ -116,7 +116,7 @@ func write_all(char=default_char, style=defaultStyle):
 func add_font(f):
 	assert(f.get_type() == "DynamicFont")
 	fonts.append(f)
-	calculate_size()
+	_calculate_size()
 	# return id of added font
 	return fonts.size() - 1
 	
@@ -163,12 +163,12 @@ func _draw():
 			
 
 # Helper function that ensures drawing in bounds of buffer
-func check_bounds(x, y):
+func _check_bounds(x, y):
 	assert(x >= 0 and x <= grid.x - 1)
 	assert(y >= 0 and y <= grid.y - 1)
 	
 # Calculate the grid size. Final result depens of font size
-func calculate_size():
+func _calculate_size():
 	
 	var width = get_size().width
 	var height = get_size().height
@@ -188,7 +188,7 @@ func calculate_size():
 # Call manually when changed font size
 func _on_resize(): # signal
 	var old_grid = grid
-	calculate_size()
+	_calculate_size()
 	if grid.x > 0 and grid.y > 0 and old_grid != grid:
 		var b = Buffer.new(grid,defaultStyle.fg, defaultStyle.bg, default_char)
 		b.transfer_from(buffer)
