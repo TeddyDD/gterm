@@ -18,7 +18,7 @@ export(float) var resize_cell_y = 1
 
 
 export(Color, RGBA) var foregound_default = Color("ffffff")  # default text color
-export(Color, RGBA) var background_default = Color("000000") # default background color
+export(Color, RGBA) var background_default = Color("000000") setget _set_background_default # default background color
 export var default_char = " " # one char
 
 # private variables
@@ -36,6 +36,8 @@ var Style = preload("res://addons/terminal/TermStyle.gd")
 
 var buffer
 var defaultStyle
+# true if code is running inside editor
+var _editor = true
 
 ####################
 # Public functions #
@@ -131,37 +133,42 @@ func resize_fonts(delta):
 #####################
 
 func _ready():
+	# editor check
+	_editor = get_tree().is_editor_hint()
+	
 	# default style
 	defaultStyle = Style.new(foregound_default, background_default, 0)
-
-	# add default font and calculate size
-	defaultStyle.font = add_font(dynamicFont)
-	assert(fonts != null)
-	
-	buffer = Buffer.new(grid,defaultStyle.fg, defaultStyle.bg, default_char, defaultStyle.font)
-	
-	connect("resized", self, "_on_resize")
+	if not _editor:
+		# add default font and calculate size
+		defaultStyle.font = add_font(dynamicFont)
+		assert(fonts != null)
+		
+		buffer = Buffer.new(grid,defaultStyle.fg, defaultStyle.bg, default_char, defaultStyle.font)
+		
+		connect("resized", self, "_on_resize")
 	update()
 
 func _draw():
-	# draw background
-	draw_rect(get_rect(), defaultStyle.bg)
-	# draw letters and boxes
-	for y in range(grid.height):
-		for x in range(grid.width):
-			var i = buffer.index(Vector2(x,y))
-			
-			# draw bg
-			var bg_rect = Rect2(x * cell.width, y * cell.height, cell.width, cell.height)
-			draw_rect(bg_rect, buffer.bgcolors[i])
-			
-			# draw text
-			var font_pos = Vector2()
-			var font_now = fonts[buffer.fonts[i]]
-			font_pos.x = (x * cell.width) + (cell.width * font_x_offset)
-			font_pos.y = (y * cell.height) + font_now.get_ascent() + (cell.height * font_y_offset)
-			draw_char( font_now, font_pos, buffer.chars[i], "W", buffer.fgcolors[i])
-			
+	if not _editor:
+		# draw background
+		draw_rect(get_rect(), defaultStyle.bg)
+		# draw letters and boxes
+		for y in range(grid.height):
+			for x in range(grid.width):
+				var i = buffer.index(Vector2(x,y))
+				
+				# draw bg
+				var bg_rect = Rect2(x * cell.width, y * cell.height, cell.width, cell.height)
+				draw_rect(bg_rect, buffer.bgcolors[i])
+				
+				# draw text
+				var font_pos = Vector2()
+				var font_now = fonts[buffer.fonts[i]]
+				font_pos.x = (x * cell.width) + (cell.width * font_x_offset)
+				font_pos.y = (y * cell.height) + font_now.get_ascent() + (cell.height * font_y_offset)
+				draw_char( font_now, font_pos, buffer.chars[i], "W", buffer.fgcolors[i])
+	else:
+		draw_rect(Rect2(get_global_rect().pos - get_global_pos(), get_size()), background_default)
 
 # Helper function that ensures drawing in bounds of buffer
 func _check_bounds(x, y):
@@ -188,12 +195,19 @@ func _calculate_size():
 
 # Call manually when changed font size
 func _on_resize(): # signal
-	var old_grid = grid
-	_calculate_size()
-	if grid.x > 0 and grid.y > 0 and old_grid != grid:
-		var b = Buffer.new(grid,defaultStyle.fg, defaultStyle.bg, default_char)
-		b.transfer_from(buffer)
-		buffer = b
-	update()
+	if not _editor:
+		var old_grid = grid
+		_calculate_size()
+		if grid.x > 0 and grid.y > 0 and old_grid != grid:
+			var b = Buffer.new(grid,defaultStyle.fg, defaultStyle.bg, default_char)
+			b.transfer_from(buffer)
+			buffer = b
+		update()
 	
-	
+# SetGet
+# Default Bg color - only for editor
+func _set_background_default(value):
+	background_default = value
+	if _editor:
+		update()
+		
