@@ -6,6 +6,10 @@ extends Control
 # default font
 export (DynamicFont) var dynamicFont
 
+export(Color, RGBA) var foregound_default = Color("ffffff")  # default text color
+export(Color, RGBA) var background_default = Color("000000") setget _set_background_default # default background color
+export var default_char = " " # one char
+
 # offset of characters in cells
 export(float) var font_x_offset = 0
 export(float) var font_y_offset = 0
@@ -16,10 +20,6 @@ export(float) var font_y_offset = 0
 export(float) var resize_cell_x = 1
 export(float) var resize_cell_y = 1
 
-
-export(Color, RGBA) var foregound_default = Color("ffffff")  # default text color
-export(Color, RGBA) var background_default = Color("000000") setget _set_background_default # default background color
-export var default_char = " " # one char
 
 # private variables
 # avaliable dynamic fonts - size of cell is based on biggest font
