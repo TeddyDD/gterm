@@ -157,9 +157,10 @@ func _draw():
 			
 			# draw text
 			var font_pos = Vector2()
+			var font_now = fonts[buffer.fonts[i]]
 			font_pos.x = (x * cell.width) + (cell.width * font_x_offset)
-			font_pos.y = ((y + 1) * cell.height) + (cell.height * font_y_offset)
-			draw_char( fonts[buffer.fonts[i]], font_pos, buffer.chars[i], "W", buffer.fgcolors[i])
+			font_pos.y = (y * cell.height) + font_now.get_ascent() + (cell.height * font_y_offset)
+			draw_char( font_now, font_pos, buffer.chars[i], "W", buffer.fgcolors[i])
 			
 
 # Helper function that ensures drawing in bounds of buffer
