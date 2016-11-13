@@ -19,12 +19,7 @@ Screenshot of `demo.tscn` | [Gif - Input](https://66.media.tumblr.com/ef38b96196
 
 ## Project Setup
 
-For now, you have to use Godot engine built from source. At least this commit is required: https://github.com/godotengine/godot/commit/564ba76becab1819bcde1265d4f119e04a6b76ee
-
-This project requires following Godot features:
-
-1. Dynamic fonts loading
-2. New Godot plug-in system (optional)
+Godot Engine version >= 2.1 is required.
 
 ## Testing
 
@@ -40,6 +35,3 @@ Now you can create terminal control from `Create new Node menu`.
 
 **OR** instance `terminal.tscn` somewhere in your scene.
 
-To distribute and install from UI, make a zip that contains the directory:
-
-`zip -r terminal.zip terminal/*`
