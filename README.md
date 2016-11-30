@@ -4,6 +4,7 @@
 
 This is simple terminal emulator like control for Godot engine. It might be useful for projects like
 
+- rougelikes
 - game about hacking/hackers
 - game about programming
 - game with ASCII graphics
