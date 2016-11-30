@@ -12,6 +12,8 @@ This is simple terminal emulator like control for Godot engine. It might be usef
 - cheat/debug console
 - think of something yourself
 
+**Notice: This control is still under development. While It's quite usable, the API may change without warning until 1.0**
+
 ## Screenshot
 Screenshot of `demo.tscn` | [Gif - Input](https://66.media.tumblr.com/ef38b961962ef316956a4a343f527564/tumblr_o8atshfiyx1ujs4h9o1_540.gif) | [Gif - Font resize](https://67.media.tumblr.com/3e736bab172592e20dab24242f01aeee/tumblr_o8atshfiyx1ujs4h9o2_540.gif) | [Gif - Terminal resize](https://67.media.tumblr.com/7fef07c7d04fa20b50c880962bb2a45b/tumblr_o8atshfiyx1ujs4h9o3_540.gif)
 
