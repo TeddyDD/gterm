@@ -13,4 +13,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 # License - fonts
 Fonts included in repository are from Ubuntu Mono family
 
-Fonts license is avaliable in `Font/UFL.txt` file.
+Fonts license is avaliable in `fonts/UFL.txt` file.
