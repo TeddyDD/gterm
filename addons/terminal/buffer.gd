@@ -34,6 +34,10 @@ func index(point):
 	var row = point.y
 	return row * size.width + column
 	
+# return column and row for given point
+func get_point(index):
+	return Vector2(index % size.y, int(index/size.y))
+	
 func get_size():
 	return size.width * size.height
 
