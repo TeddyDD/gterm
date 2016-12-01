@@ -28,7 +28,7 @@ func _init(size, fg, bg, char=" ", font_id=0, set_defaults=true):
 	if set_defaults:
 		set_default(char,fg,bg, font_id)
 
-# returns index for given column and row
+# return index for given column and row
 func index(point):
 	var column = point.x
 	var row = point.y
