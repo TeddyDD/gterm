@@ -2,7 +2,7 @@
 extends Panel
 
 var cursor = Vector2(0,0)
-onready var terminal = get_node("VBoxContainer/Terminal")
+var terminal
 var current_style
 
 # color pickers
@@ -13,11 +13,16 @@ onready var bg_picker = get_node("VBoxContainer/HBoxContainer/bg_color")
 onready var font_select = get_node("VBoxContainer/HBoxContainer/font_style")
 
 func _ready():
+	terminal = get_node("VBoxContainer/Terminal")
 	# load additional fonts
 	terminal.add_font(preload("res://fonts/Ubuntu_mono_bold.tres"))
 	terminal.add_font(preload("res://fonts/Ubuntu_mono_italic.tres"))
 	terminal.add_font(preload("res://fonts/Ubuntu_mono_italic_bold.tres"))
 	terminal._on_resize()
+	
+	
+	# current terminal style
+	current_style = terminal.Style.new(fg_picker.get_color(), bg_picker.get_color(), 0)
 	
 	# add menu items for fonts
 	font_select.add_item("Normal", 0)
@@ -25,12 +30,8 @@ func _ready():
 	font_select.add_item("Italic", 2)
 	font_select.add_item("Bold Italic", 3)
 	font_select.select(0)
-	
-	fg_picker.set_color(terminal.foregound_default)
-	bg_picker.set_color(terminal.background_default)
-	
-	# current terminal style
-	current_style = terminal.Style.new(fg_picker.get_color(), bg_picker.get_color(), 0)
+
+
 
 # Enter button
 func _on_enter_pressed():
