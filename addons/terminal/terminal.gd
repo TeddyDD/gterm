@@ -45,14 +45,14 @@ var _editor = true
 
 # call this functions and then update() to redraw changes.
 
-# Write char in given postion using given style
+# Write character in given postion using given style
 # any parameter can be null
-func write(x, y, char, style=defaultStyle):
+func write(x, y, character, style=defaultStyle):
 	_check_bounds(x, y)
-	assert(char.length() == 1) # this function can take only one char
+	assert(character.length() == 1) # this function can take only one character
 	
-	if char != null:
-		buffer.chars[buffer.index(Vector2(x, y))] = char
+	if character != null:
+		buffer.chars[buffer.index(Vector2(x, y))] = character
 	if style != null:
 		if style.fg != null:
 			buffer.fgcolors[buffer.index(Vector2(x, y))] = style.fg
@@ -91,16 +91,16 @@ func write_string(x, y, string, style=defaultStyle):
 	return cursor
 
 # draw rectangle with given parameters
-# char, fg and bg can be null
-func write_rect(rect, char=null, style=defaultStyle):
+# character, fg and bg can be null
+func write_rect(rect, character=null, style=defaultStyle):
 	_check_bounds(rect.pos.x, rect.pos.y)
 	_check_bounds(rect.end.x, rect.end.y)
 	
 	for y in range(rect.size.y):
 		for x in range(rect.size.x):
 			var i = buffer.index(Vector2(x + rect.pos.x, y + rect.pos.y))
-			if char != null:
-				buffer.chars[i] = char
+			if character != null:
+				buffer.chars[i] = character
 			if style.fg != null:
 				buffer.fgcolors[i] = style.fg
 			if style.bg != null:
@@ -109,9 +109,9 @@ func write_rect(rect, char=null, style=defaultStyle):
 				buffer.fonts[i] = style.font
 
 # Clean screen with given params
-func write_all(char=default_char, style=defaultStyle):
-	assert(char != null and style.fg != null and style.bg != null)
-	buffer.set_default(char, style.fg, style.bg, style.font)
+func write_all(character=default_char, style=defaultStyle):
+	assert(character != null and style.fg != null and style.bg != null)
+	buffer.set_default(character, style.fg, style.bg, style.font)
 
 # add font to fonts array and calulate size
 # returns ID of font
