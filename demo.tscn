@@ -87,22 +87,6 @@ shortcut = null
 text = "font -"
 flat = false
 
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 103.0
-margin/top = 0.0
-margin/right = 148.0
-margin/bottom = 24.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-text = "test3"
-flat = false
-
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
 
 rect/min_size = Vector2( 200, 0 )
@@ -110,9 +94,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 152.0
+margin/left = 103.0
 margin/top = 0.0
-margin/right = 352.0
+margin/right = 303.0
 margin/bottom = 24.0
 placeholder/alpha = 0.6
 focus_mode = 2
@@ -125,14 +109,30 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 356.0
+margin/left = 307.0
 margin/top = 0.0
-margin/right = 402.0
+margin/right = 353.0
 margin/bottom = 24.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "enter"
+flat = false
+
+[node name="new_line" type="Button" parent="VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 357.0
+margin/top = 0.0
+margin/right = 423.0
+margin/bottom = 24.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "new line"
 flat = false
 
 [node name="fg_color" type="ColorPickerButton" parent="VBoxContainer/HBoxContainer"]
@@ -141,9 +141,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 406.0
+margin/left = 427.0
 margin/top = 0.0
-margin/right = 429.0
+margin/right = 450.0
 margin/bottom = 24.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -159,9 +159,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 433.0
+margin/left = 454.0
 margin/top = 0.0
-margin/right = 456.0
+margin/right = 477.0
 margin/bottom = 24.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -177,9 +177,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 460.0
+margin/left = 481.0
 margin/top = 0.0
-margin/right = 506.0
+margin/right = 527.0
 margin/bottom = 24.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -194,9 +194,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 510.0
+margin/left = 531.0
 margin/top = 0.0
-margin/right = 630.0
+margin/right = 651.0
 margin/bottom = 24.0
 toggle_mode = false
 click_on_press = true
@@ -214,6 +214,8 @@ items = [  ]
 [connection signal="text_entered" from="VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/enter" to="." method="_on_enter_pressed"]
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/new_line" to="." method="_on_new_line_pressed"]
 
 [connection signal="color_changed" from="VBoxContainer/HBoxContainer/fg_color" to="." method="_on_fg_color_color_changed"]
 

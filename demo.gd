@@ -38,11 +38,10 @@ func _on_enter_pressed():
 	var string = get_node("VBoxContainer/HBoxContainer/LineEdit").get_text()
 	cursor = terminal.write_string(cursor.x, cursor.y, string, current_style)
 	
-	# go to begginig of next line
-	cursor.x = 0
-	cursor.y += 1
-	if cursor.y >= terminal.grid.y - 1:
-		cursor.y = 0
+
+	cursor.x += 1
+	if cursor.x >= terminal.grid.x - 1:
+		_on_new_line_pressed()
 	
 	# redraw terminal 
 	terminal.update()
@@ -83,3 +82,12 @@ func _on_fg_color_color_changed( color ):
 
 func _on_bg_color_color_changed( color ):
 	current_style.bg = color
+
+
+func _on_new_line_pressed():
+	# go to begginig of next line
+	cursor.x = 0
+	cursor.y += 1
+	if cursor.y >= terminal.grid.y - 1:
+		cursor.y = 0
+	
