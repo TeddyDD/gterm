@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=5 format=1]
 
-[ext_resource path="res://demo.gd" type="Script" id=1]
-[ext_resource path="res://addons/terminal/terminal.tscn" type="PackedScene" id=2]
-[ext_resource path="res://fonts/Ubuntu_mono_regular.tres" type="DynamicFont" id=3]
+[ext_resource path="res://fonts/Ubuntu_mono_regular.tres" type="DynamicFont" id=1]
+[ext_resource path="res://demo.gd" type="Script" id=2]
+[ext_resource path="res://addons/terminal/terminal.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Theme" id=1]
+
+default_font = ExtResource( 1 )
 
 [node name="Panel" type="Panel"]
 
@@ -12,11 +16,12 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
+theme/theme = SubResource( 1 )
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
-script/script = ExtResource( 1 )
+script/script = ExtResource( 2 )
 __meta__ = { "_edit_lock_":true }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -34,14 +39,14 @@ margin/bottom = 10.0
 alignment = 0
 __meta__ = { "_edit_lock_":true }
 
-[node name="Terminal" parent="VBoxContainer" instance=ExtResource( 2 )]
+[node name="Terminal" parent="VBoxContainer" instance=ExtResource( 3 )]
 
 anchor/right = 0
 anchor/bottom = 0
 size_flags/vertical = 3
 margin/right = 1004.0
 margin/bottom = 552.0
-dynamicFont = ExtResource( 3 )
+dynamicFont = ExtResource( 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 
@@ -63,7 +68,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 49.0
+margin/right = 60.0
 margin/bottom = 24.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -77,9 +82,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 53.0
+margin/left = 64.0
 margin/top = 0.0
-margin/right = 99.0
+margin/right = 124.0
 margin/bottom = 24.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -94,10 +99,11 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 103.0
+margin/left = 128.0
 margin/top = 0.0
-margin/right = 303.0
-margin/bottom = 24.0
+margin/right = 328.0
+margin/bottom = 26.0
+custom_fonts/font = ExtResource( 1 )
 placeholder/alpha = 0.6
 focus_mode = 2
 caret/caret_blink = false
@@ -109,9 +115,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 307.0
+margin/left = 332.0
 margin/top = 0.0
-margin/right = 353.0
+margin/right = 384.0
 margin/bottom = 24.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -125,9 +131,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 357.0
+margin/left = 388.0
 margin/top = 0.0
-margin/right = 423.0
+margin/right = 464.0
 margin/bottom = 24.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -141,9 +147,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 427.0
+margin/left = 468.0
 margin/top = 0.0
-margin/right = 450.0
+margin/right = 496.0
 margin/bottom = 24.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -159,9 +165,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 454.0
+margin/left = 500.0
 margin/top = 0.0
-margin/right = 477.0
+margin/right = 528.0
 margin/bottom = 24.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -177,9 +183,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 481.0
+margin/left = 532.0
 margin/top = 0.0
-margin/right = 527.0
+margin/right = 584.0
 margin/bottom = 24.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -194,9 +200,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 531.0
+margin/left = 588.0
 margin/top = 0.0
-margin/right = 651.0
+margin/right = 708.0
 margin/bottom = 24.0
 toggle_mode = false
 click_on_press = true
