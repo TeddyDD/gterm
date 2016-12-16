@@ -70,6 +70,8 @@ func write(x, y, character, style=defaultStyle):
 func write_string(x, y, string, style=defaultStyle):
 	_check_bounds(x,y)
 	assert(string != null)
+	if string.length() >= buffer.get_size() - buffer.index(Vector2(x,y)):
+		string = string.left(buffer.get_size() - buffer.index(Vector2(x,y)))
 	
 	var cursor = Vector2(x, y)
 	for l in range(string.length()):
