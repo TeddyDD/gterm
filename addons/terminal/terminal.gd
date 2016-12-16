@@ -159,6 +159,13 @@ func _draw():
 	if not _editor:
 		# draw background
 		draw_rect(get_rect(), defaultStyle.bg)
+		
+		# variables for loop
+		var char_now 
+		var fgcolor_now
+		var font_now 
+		var font_pos = Vector2()
+		
 		# draw letters and boxes
 		for y in range(grid.height):
 			for x in range(grid.width):
@@ -166,14 +173,27 @@ func _draw():
 				
 				# draw bg
 				var bg_rect = Rect2(x * cell.width, y * cell.height, cell.width, cell.height)
-				draw_rect(bg_rect, buffer.bgcolors[i])
+				if buffer.bgcolors[i] != null:
+					draw_rect(bg_rect, buffer.bgcolors[i])
 				
 				# draw text
-				var font_pos = Vector2()
-				var font_now = fonts[buffer.fonts[i]]
+				char_now = buffer.chars[i]
+				if char_now == null:
+					char_now = default_char
+				
+				if not buffer.fonts[i] == null:
+					font_now = fonts[buffer.fonts[i]]
+				else:
+					font_now = fonts[defaultStyle.font]
+				
+				fgcolor_now = buffer.fgcolors[i]
+				if fgcolor_now == null:
+					fgcolor_now = defaultStyle.fg
+				
+				font_pos = Vector2()
 				font_pos.x = (x * cell.width) + (cell.width * font_x_offset)
 				font_pos.y = (y * cell.height) + font_now.get_ascent() + (cell.height * font_y_offset)
-				draw_char( font_now, font_pos, buffer.chars[i], "W", buffer.fgcolors[i])
+				draw_char( font_now, font_pos, char_now, "W", fgcolor_now)
 	else:
 		draw_rect(Rect2(get_global_rect().pos - get_global_pos(), get_size()), background_default)
 	_draw_time = (OS.get_ticks_msec() - t)
