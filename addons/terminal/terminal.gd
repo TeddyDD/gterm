@@ -39,6 +39,9 @@ var defaultStyle
 # true if code is running inside editor
 var _editor = true
 
+# debug
+var draw_time = 0
+
 ####################
 # Public functions #
 ####################
@@ -149,6 +152,7 @@ func _ready():
 	update()
 
 func _draw():
+	var t = OS.get_ticks_msec()
 	if not _editor:
 		# draw background
 		draw_rect(get_rect(), defaultStyle.bg)
@@ -169,6 +173,7 @@ func _draw():
 				draw_char( font_now, font_pos, buffer.chars[i], "W", buffer.fgcolors[i])
 	else:
 		draw_rect(Rect2(get_global_rect().pos - get_global_pos(), get_size()), background_default)
+	draw_time = (OS.get_ticks_msec() - t)
 
 # Helper function that ensures drawing in bounds of buffer
 func _check_bounds(x, y):
