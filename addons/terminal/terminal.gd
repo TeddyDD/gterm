@@ -54,16 +54,16 @@ var _draw_time = 0
 func write(x, y, character, style=defaultStyle):
 	_check_bounds(x, y)
 	assert(character.length() == 1) # this function can take only one character
-	
+	var i = buffer.index(Vector2(x, y))
 	if character != null:
-		buffer.chars[buffer.index(Vector2(x, y))] = character
+		buffer.chars[i] = character
 	if style != null:
 		if style.fg != null:
-			buffer.fgcolors[buffer.index(Vector2(x, y))] = style.fg
+			buffer.fgcolors[i] = style.fg
 		if style.bg != null:
-			buffer.bgcolors[buffer.index(Vector2(x, y))] = style.bg
+			buffer.bgcolors[i] = style.bg
 		if style.font != null:
-			buffer.fonts[buffer.index(Vector2(x, y))] = style.font
+			buffer.fonts[i] = style.font
 
 # Write string in given postion. fg and bg can be null.
 # This method use simple line wrapping. 
