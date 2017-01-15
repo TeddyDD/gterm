@@ -167,10 +167,10 @@ func _draw():
 		var font_pos = Vector2()
 		
 		# draw letters and boxes
+		# index
+		var i = 0
 		for y in range(grid.height):
 			for x in range(grid.width):
-				var i = buffer.index(Vector2(x,y))
-				
 				# draw bg
 				var bg_rect = Rect2(x * cell.width, y * cell.height, cell.width, cell.height)
 				if buffer.bgcolors[i] != null:
@@ -194,6 +194,7 @@ func _draw():
 				font_pos.x = (x * cell.width) + (cell.width * font_x_offset)
 				font_pos.y = (y * cell.height) + font_now.get_ascent() + (cell.height * font_y_offset)
 				draw_char( font_now, font_pos, char_now, "W", fgcolor_now)
+				i += 1
 	else:
 		draw_rect(Rect2(get_global_rect().pos - get_global_pos(), get_size()), background_default)
 	_draw_time = (OS.get_ticks_msec() - t)
