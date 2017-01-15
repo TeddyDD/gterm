@@ -67,6 +67,8 @@ func _on_font_minus_pressed():
 func _on_clean_pressed():
 	var c = get_node("VBoxContainer/HBoxContainer/LineEdit").get_text()
 	c = c.left(1)
+	if c.empty():
+		c = " "
 	cursor = Vector2()
 	terminal.defaultStyle.bg = current_style.bg
 	terminal.write_all(c, current_style)
