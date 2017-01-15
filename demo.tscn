@@ -1,12 +1,31 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=9 format=1]
 
-[ext_resource path="res://fonts/Ubuntu_mono_regular.tres" type="DynamicFont" id=1]
-[ext_resource path="res://demo.gd" type="Script" id=2]
-[ext_resource path="res://addons/terminal/terminal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://demo.gd" type="Script" id=1]
+[ext_resource path="res://addons/terminal/terminal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fonts/UbuntuMono-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://fonts/Ubuntu_mono_regular.tres" type="DynamicFont" id=4]
+
+[sub_resource type="DynamicFontData" id=4]
+
+font_path = "res://fonts/UbuntuMono-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=5]
+
+font/size = 16
+font/use_mipmaps = false
+font/use_filter = false
+font/font = SubResource( 4 )
 
 [sub_resource type="Theme" id=1]
 
-default_font = ExtResource( 1 )
+default_font = SubResource( 5 )
+
+[sub_resource type="DynamicFont" id=6]
+
+font/size = 16
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 3 )
 
 [node name="Panel" type="Panel"]
 
@@ -21,7 +40,7 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
-script/script = ExtResource( 2 )
+script/script = ExtResource( 1 )
 __meta__ = { "_edit_lock_":true }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -39,14 +58,14 @@ margin/bottom = 10.0
 alignment = 0
 __meta__ = { "_edit_lock_":true }
 
-[node name="Terminal" parent="VBoxContainer" instance=ExtResource( 3 )]
+[node name="Terminal" parent="VBoxContainer" instance=ExtResource( 2 )]
 
 anchor/right = 0
 anchor/bottom = 0
 size_flags/vertical = 3
 margin/right = 1004.0
-margin/bottom = 552.0
-dynamicFont = ExtResource( 1 )
+margin/bottom = 550.0
+dynamicFont = SubResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 
@@ -55,7 +74,7 @@ focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 556.0
+margin/top = 554.0
 margin/right = 1004.0
 margin/bottom = 580.0
 alignment = 0
@@ -69,7 +88,7 @@ size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 60.0
-margin/bottom = 24.0
+margin/bottom = 26.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -85,7 +104,7 @@ size_flags/vertical = 2
 margin/left = 64.0
 margin/top = 0.0
 margin/right = 124.0
-margin/bottom = 24.0
+margin/bottom = 26.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -103,7 +122,7 @@ margin/left = 128.0
 margin/top = 0.0
 margin/right = 328.0
 margin/bottom = 26.0
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( 4 )
 placeholder/alpha = 0.6
 focus_mode = 2
 caret/caret_blink = false
@@ -118,7 +137,7 @@ size_flags/vertical = 2
 margin/left = 332.0
 margin/top = 0.0
 margin/right = 384.0
-margin/bottom = 24.0
+margin/bottom = 26.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -134,7 +153,7 @@ size_flags/vertical = 2
 margin/left = 388.0
 margin/top = 0.0
 margin/right = 464.0
-margin/bottom = 24.0
+margin/bottom = 26.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -150,7 +169,7 @@ size_flags/vertical = 2
 margin/left = 468.0
 margin/top = 0.0
 margin/right = 496.0
-margin/bottom = 24.0
+margin/bottom = 26.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -168,7 +187,7 @@ size_flags/vertical = 2
 margin/left = 500.0
 margin/top = 0.0
 margin/right = 528.0
-margin/bottom = 24.0
+margin/bottom = 26.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -186,7 +205,7 @@ size_flags/vertical = 2
 margin/left = 532.0
 margin/top = 0.0
 margin/right = 584.0
-margin/bottom = 24.0
+margin/bottom = 26.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -203,7 +222,7 @@ size_flags/vertical = 2
 margin/left = 588.0
 margin/top = 0.0
 margin/right = 708.0
-margin/bottom = 24.0
+margin/bottom = 26.0
 toggle_mode = false
 click_on_press = true
 enabled_focus_mode = 0
