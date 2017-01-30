@@ -144,8 +144,7 @@ func add_font(f):
 func resize_fonts(delta):
 	_draw_buffer.request_full_redraw()
 	for f in fonts:
-		var new_size = f.get_size() + delta
-		f.set_size(new_size)
+		f.set_size(f.get_size() + delta)
 		
 func redraw_terminal():
 	_redraw = true
