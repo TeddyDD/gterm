@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://addons/terminal/terminal.gd" type="Script" id=1]
+[ext_resource path="res://addons/terminal/terminal_draw.gd" type="Script" id=2]
 
 [node name="Terminal" type="Control"]
 
@@ -18,10 +19,38 @@ script/script = ExtResource( 1 )
 dynamicFont = null
 foregound_default = Color( 1, 1, 1, 1 )
 background_default = Color( 0, 0, 0, 1 )
-default_char = " "
 font_x_offset = 0
 font_y_offset = 0
 resize_cell_x = 1
 resize_cell_y = 1
+
+[node name="capture" type="Viewport" parent="."]
+
+rect = Rect2( 0, 0, 40, 40 )
+own_world = false
+world = null
+transparent_bg = false
+render_target/enabled = true
+render_target/v_flip = false
+render_target/clear_on_new_frame = false
+render_target/filter = false
+render_target/gen_mipmaps = false
+render_target/update_mode = 3
+audio_listener/enable_2d = false
+audio_listener/enable_3d = false
+physics/object_picking = false
+gui/disable_input = false
+
+[node name="draw buffer" type="Control" parent="capture"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+script/script = ExtResource( 2 )
 
 

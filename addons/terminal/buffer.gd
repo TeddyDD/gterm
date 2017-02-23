@@ -7,6 +7,8 @@ var fgcolors # foreground (text) colors
 var bgcolors # background colors
 var fonts    # font IDs
 
+var damage = []
+
 # Create buffer of given size_c_r (Vector2D, columns, rows) and fill with default values
 # char by default is " " (space)
 func _init(size, fg, bg, character=" ", font_id=0, set_defaults=true):
@@ -34,7 +36,7 @@ func index(point):
 	
 # return column and row for given point
 func get_point(index):
-	return Vector2(index % size.y, int(index/size.y))
+	return Vector2(int(index) % int(size.y), int(index/size.y))
 	
 func get_size():
 	return size.width * size.height

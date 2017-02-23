@@ -8,7 +8,7 @@ export (DynamicFont) var dynamicFont
 
 export(Color, RGBA) var foregound_default = Color("ffffff")  # default text color
 export(Color, RGBA) var background_default = Color("000000") setget _set_background_default # default background color
-export var default_char = " " # one char
+
 
 # offset of characters in cells
 export(float) var font_x_offset = 0
@@ -36,11 +36,14 @@ var Style = preload("res://addons/terminal/TermStyle.gd")
 
 var buffer
 var defaultStyle
+
+var _draw_buffer
+var _draw_texture
+
 # true if code is running inside editor
 var _editor = true
 
-# debug
-var _draw_time = 0
+var _redraw = true
 
 
 ####################
@@ -49,12 +52,18 @@ var _draw_time = 0
 
 # call this functions and then update() to redraw changes.
 
+# return cell from mouse coordinates
+func get_cell(point):
+	return Vector2(_bound_var(0,floor(point.x / cell.width), grid.x - 1), \
+	 _bound_var(0,floor(point.y / cell.height),grid.y - 1))
+
 # Write character in given postion using given style
 # any parameter can be null
 func write(x, y, character, style=defaultStyle):
 	_check_bounds(x, y)
 	assert(character.length() == 1) # this function can take only one character
 	var i = buffer.index(Vector2(x, y))
+	buffer.damage.append(Vector2(x,y))
 	if character != null:
 		buffer.chars[i] = character
 	if style != null:
@@ -77,6 +86,7 @@ func write_string(x, y, string, style=defaultStyle):
 	var cursor = Vector2(x, y)
 	for l in range(string.length()):
 		var i = buffer.index(Vector2(cursor.x, cursor.y))
+		buffer.damage.append(cursor)
 		var c = string[l]
 		buffer.chars[i] = c
 		if style.fg != null:
@@ -113,10 +123,12 @@ func write_rect(rect, character=null, style=defaultStyle):
 				buffer.bgcolors[i] = style.bg
 			if style.font != null:
 				buffer.fonts[i] = style.font
+			buffer.damage.append(Vector2(x,y))
 
 # Clean screen with given params
-func write_all(character=default_char, style=defaultStyle):
-	assert(character != null and style.fg != null and style.bg != null)
+func write_all(character=null, style=defaultStyle):
+	_draw_buffer.request_full_redraw()
+	assert(style.fg != null and style.bg != null)
 	buffer.set_default(character, style.fg, style.bg, style.font)
 
 # add font to fonts array and calulate size
@@ -130,9 +142,13 @@ func add_font(f):
 	
 # resize all fonts
 func resize_fonts(delta):
+	_draw_buffer.request_full_redraw()
 	for f in fonts:
 		var new_size = f.get_size() + delta
 		f.set_size(new_size)
+		
+func redraw_terminal():
+	_redraw = true
 
 #####################
 # Private functions #
@@ -149,60 +165,54 @@ func _ready():
 		defaultStyle.font = add_font(dynamicFont)
 		assert(fonts != null)
 		
-		buffer = Buffer.new(grid,defaultStyle.fg, defaultStyle.bg, default_char, defaultStyle.font)
+		buffer = Buffer.new(grid,defaultStyle.fg, defaultStyle.bg, null, defaultStyle.font)
 		
 		connect("resized", self, "_on_resize")
+		
+		_draw_buffer = get_node("capture/draw buffer")
+		_draw_buffer.connect("_done_rendering", self, "_render_done")
+		
+		_draw_buffer.mode = _draw_buffer.FULL_REDRAW
+		_draw_buffer.update()
+		set_fixed_process(true)
+		
+func _render_done(mode):
+	_draw_texture = get_node("capture").get_render_target_texture()
 	update()
+	if mode == _draw_buffer.FULL_REDRAW:
+		buffer.damage = []
+	_draw_buffer.mode = _draw_buffer.DAMAGE_REDRAW
+	
+
+func _fixed_process(delta):
+	if _redraw:
+		_draw_buffer.update()
+		_redraw = false
+		
 
 func _draw():
-	var t = OS.get_ticks_msec()
-	if not _editor:
-		# draw background
-		draw_rect(get_rect(), defaultStyle.bg)
-		
-		# variables for loop
-		var char_now 
-		var fgcolor_now
-		var font_now 
-		var font_pos = Vector2()
-		
-		# draw letters and boxes
-		# index
-		var i = 0
-		for y in range(grid.height):
-			for x in range(grid.width):
-				# draw bg
-				var bg_rect = Rect2(x * cell.width, y * cell.height, cell.width, cell.height)
-				if buffer.bgcolors[i] != null:
-					draw_rect(bg_rect, buffer.bgcolors[i])
-				
-				# draw text
-				char_now = buffer.chars[i]
-				if char_now == null:
-					char_now = default_char
-				
-				if not buffer.fonts[i] == null:
-					font_now = fonts[buffer.fonts[i]]
-				else:
-					font_now = fonts[defaultStyle.font]
-				
-				fgcolor_now = buffer.fgcolors[i]
-				if fgcolor_now == null:
-					fgcolor_now = defaultStyle.fg
-				
-				font_pos = Vector2()
-				font_pos.x = (x * cell.width) + (cell.width * font_x_offset)
-				font_pos.y = (y * cell.height) + font_now.get_ascent() + (cell.height * font_y_offset)
-				draw_char( font_now, font_pos, char_now, "W", fgcolor_now)
-				i += 1
-	else:
+	if _editor:
 		draw_rect(Rect2(get_global_rect().pos - get_global_pos(), get_size()), background_default)
-	_draw_time = (OS.get_ticks_msec() - t)
+	
+	if _draw_texture != null:
+		draw_texture(_draw_texture, Vector2(0,0))
+	else:
+		_draw_buffer.request_full_redraw()
+		_draw_buffer.on_resize()
+		_draw_buffer.update()
+	
 
 # Helper function that ensures drawing in bounds of buffer
 func _check_bounds(x, y):
 	assert(x >= 0 and x <= grid.x - 1)
 	assert(y >= 0 and y <= grid.y - 1)
+	
+func _bound_var(low, variable, high):
+	if variable > high:
+		variable = high
+	elif variable < low:
+		variable = low
+	return variable
 	
 # Calculate the grid size. Final result depens of font size
 func _calculate_size():
@@ -228,10 +238,13 @@ func _on_resize(): # signal
 		var old_grid = grid
 		_calculate_size()
 		if grid.x > 0 and grid.y > 0 and old_grid != grid:
-			var b = Buffer.new(grid,defaultStyle.fg, defaultStyle.bg, default_char)
+			var b = Buffer.new(grid,defaultStyle.fg, defaultStyle.bg, null)
 			b.transfer_from(buffer)
 			buffer = b
-		update()
+		_draw_buffer.mode = _draw_buffer.RESIZE_REDRAW
+		_draw_buffer.on_resize()
+		redraw_terminal()
+
 	
 # SetGet
 # Default Bg color - only for editor

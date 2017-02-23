@@ -5,22 +5,22 @@
 [ext_resource path="res://fonts/UbuntuMono-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://fonts/Ubuntu_mono_regular.tres" type="DynamicFont" id=4]
 
-[sub_resource type="DynamicFontData" id=4]
+[sub_resource type="DynamicFontData" id=1]
 
 font_path = "res://fonts/UbuntuMono-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=2]
 
 font/size = 16
 font/use_mipmaps = false
 font/use_filter = false
-font/font = SubResource( 4 )
+font/font = SubResource( 1 )
 
-[sub_resource type="Theme" id=1]
+[sub_resource type="Theme" id=3]
 
-default_font = SubResource( 5 )
+default_font = SubResource( 2 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=4]
 
 font/size = 16
 font/use_mipmaps = false
@@ -35,7 +35,7 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-theme/theme = SubResource( 1 )
+theme/theme = SubResource( 3 )
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 0.0
@@ -65,7 +65,7 @@ anchor/bottom = 0
 size_flags/vertical = 3
 margin/right = 1004.0
 margin/bottom = 550.0
-dynamicFont = SubResource( 6 )
+dynamicFont = SubResource( 4 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 
@@ -232,6 +232,25 @@ align = 0
 selected = -1
 items = [  ]
 
+[node name="draw" type="CheckButton" parent="VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 712.0
+margin/top = 0.0
+margin/right = 908.0
+margin/bottom = 26.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "Draw with mouse"
+flat = false
+align = 0
+
+[connection signal="input_event" from="VBoxContainer/Terminal" to="." method="_on_Terminal_input_event"]
+
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/font_plus" to="." method="_on_font_plus_pressed"]
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/font_minus" to="." method="_on_font_minus_pressed"]
@@ -249,5 +268,7 @@ items = [  ]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/clean" to="." method="_on_clean_pressed"]
 
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/font_style" to="." method="_on_font_style_item_selected"]
+
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/draw" to="." method="_on_draw_toggled"]
 
 
