@@ -54,8 +54,8 @@ var _redraw = true
 
 # return cell from mouse coordinates
 func get_cell(point):
-	return Vector2(_bound_var(0,floor(point.x / cell.width), grid.x - 1), \
-	 _bound_var(0,floor(point.y / cell.height),grid.y - 1))
+	return Vector2(clamp(floor(point.x / cell.width), 0, grid.x - 1),
+	               clamp(floor(point.y / cell.height), 0, grid.y - 1))
 
 # Write character in given postion using given style
 # any parameter can be null
@@ -206,12 +206,6 @@ func _check_bounds(x, y):
 	assert(x >= 0 and x <= grid.x - 1)
 	assert(y >= 0 and y <= grid.y - 1)
 	
-func _bound_var(low, variable, high):
-	if variable > high:
-		variable = high
-	elif variable < low:
-		variable = low
-	return variable
 	
 # Calculate the grid size. Final result depens of font size
 func _calculate_size():
