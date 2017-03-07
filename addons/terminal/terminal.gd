@@ -173,7 +173,7 @@ func _ready():
 		
 		_draw_buffer.mode = _draw_buffer.FULL_REDRAW
 		_draw_buffer.update()
-		set_fixed_process(true)
+		set_process(true)
 		
 func _render_done(mode):
 	_draw_texture = get_node("capture").get_render_target_texture()
@@ -183,7 +183,7 @@ func _render_done(mode):
 	_draw_buffer.mode = _draw_buffer.DAMAGE_REDRAW
 	
 
-func _fixed_process(delta):
+func _process(delta):
 	if _redraw:
 		_draw_buffer.update()
 		_redraw = false
