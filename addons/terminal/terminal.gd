@@ -96,7 +96,7 @@ func write_string(x, y, string, style=defaultStyle):
 		if style.font != null:
 			buffer.fonts[i] = style.font
 		# wrap lines
-		if cursor.x >= grid.width:
+		if cursor.x >= grid.width - 1:
 			cursor.y += 1
 			cursor.x = 0
 		elif cursor.y >= grid.height:
