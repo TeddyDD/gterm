@@ -249,6 +249,22 @@ text = "Draw with mouse"
 flat = false
 align = 0
 
+[node name="rand_bg" type="Button" parent="VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 912.0
+margin/top = 0.0
+margin/right = 996.0
+margin/bottom = 26.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Random BG"
+flat = false
+
 [connection signal="resized" from="." to="." method="_on_Panel_resized"]
 
 [connection signal="input_event" from="VBoxContainer/Terminal" to="." method="_on_Terminal_input_event"]
@@ -272,5 +288,7 @@ align = 0
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/font_style" to="." method="_on_font_style_item_selected"]
 
 [connection signal="toggled" from="VBoxContainer/HBoxContainer/draw" to="." method="_on_draw_toggled"]
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/rand_bg" to="." method="_on_rand_bg_pressed"]
 
 

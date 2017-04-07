@@ -114,3 +114,11 @@ func _on_draw_toggled( pressed ):
 func _on_Panel_resized():
 	if terminal != null:
 		OS.set_window_title("Terminal: %s" % terminal.grid)
+
+# using internal apis
+func _on_rand_bg_pressed():
+	for i in range(terminal.buffer.get_size()):
+		terminal.buffer.bgcolors[i] = Color(randf(), randf(), randf())
+	terminal._draw_buffer.request_full_redraw()
+	terminal.redraw_terminal()
+	
