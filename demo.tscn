@@ -249,6 +249,8 @@ text = "Draw with mouse"
 flat = false
 align = 0
 
+[connection signal="resized" from="." to="." method="_on_Panel_resized"]
+
 [connection signal="input_event" from="VBoxContainer/Terminal" to="." method="_on_Terminal_input_event"]
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/font_plus" to="." method="_on_font_plus_pressed"]

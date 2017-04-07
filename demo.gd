@@ -109,3 +109,8 @@ func _on_Terminal_input_event( ev ):
 
 func _on_draw_toggled( pressed ):
 	draw_mouse = pressed
+
+
+func _on_Panel_resized():
+	if terminal != null:
+		OS.set_window_title("Terminal: %s" % terminal.grid)
