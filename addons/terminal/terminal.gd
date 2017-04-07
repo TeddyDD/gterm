@@ -63,7 +63,7 @@ func write(x, y, character, style=defaultStyle):
 	_check_bounds(x, y)
 	assert(character.length() == 1) # this function can take only one character
 	var i = buffer.index(Vector2(x, y))
-	buffer.damage.append(Vector2(x,y))
+	buffer.damage.append(i)
 	if character != null:
 		buffer.chars[i] = character
 	if style != null:
@@ -86,7 +86,7 @@ func write_string(x, y, string, style=defaultStyle):
 	var cursor = Vector2(x, y)
 	for l in range(string.length()):
 		var i = buffer.index(Vector2(cursor.x, cursor.y))
-		buffer.damage.append(cursor)
+		buffer.damage.append(i)
 		var c = string[l]
 		buffer.chars[i] = c
 		if style.fg != null:
@@ -123,7 +123,7 @@ func write_rect(rect, character=null, style=defaultStyle):
 				buffer.bgcolors[i] = style.bg
 			if style.font != null:
 				buffer.fonts[i] = style.font
-			buffer.damage.append(Vector2(x,y))
+			buffer.damage.append(i)
 
 # Clean screen with given params
 func write_all(character=null, style=defaultStyle):
