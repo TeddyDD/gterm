@@ -62,7 +62,7 @@ func get_cell(point):
 func write(x, y, character, style=defaultStyle):
 	_check_bounds(x, y)
 	assert(character.length() == 1) # this function can take only one character
-	var i = buffer.index(Vector2(x, y))
+	var i = buffer.index(x, y)
 	buffer.damage.append(i)
 	if character != null:
 		buffer.chars[i] = character
@@ -80,12 +80,13 @@ func write(x, y, character, style=defaultStyle):
 func write_string(x, y, string, style=defaultStyle):
 	_check_bounds(x,y)
 	assert(string != null)
-	if string.length() >= buffer.get_size() - buffer.index(Vector2(x,y)):
-		string = string.left(buffer.get_size() - buffer.index(Vector2(x,y)))
+	var cut = buffer.get_size() - buffer.index(x,y)
+	if string.length() >= cut:
+		string = string.left(cut) 
 	
 	var cursor = Vector2(x, y)
+	var i = buffer.index(cursor.x, cursor.y)
 	for l in range(string.length()):
-		var i = buffer.index(Vector2(cursor.x, cursor.y))
 		buffer.damage.append(i)
 		var c = string[l]
 		buffer.chars[i] = c
@@ -104,6 +105,7 @@ func write_string(x, y, string, style=defaultStyle):
 			return cursor
 		else:
 			cursor.x += 1
+		i += 1
 	return cursor
 
 # draw rectangle with given parameters
@@ -114,7 +116,7 @@ func write_rect(rect, character=null, style=defaultStyle):
 	
 	for y in range(rect.size.y):
 		for x in range(rect.size.x):
-			var i = buffer.index(Vector2(x + rect.pos.x, y + rect.pos.y))
+			var i = buffer.index(x + rect.pos.x, y + rect.pos.y)
 			if character != null:
 				buffer.chars[i] = character
 			if style.fg != null:

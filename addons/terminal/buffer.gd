@@ -31,8 +31,8 @@ func _init(size, fg, bg, character=" ", font_id=0, set_defaults=true):
 		set_default(character,fg,bg, font_id)
 
 # return index for given column and row
-func index(point):
-	return point.y * size.width + point.x
+func index(x, y):
+	return y * size.width + x
 	
 # return column and row for given point
 func get_point(index):
@@ -46,8 +46,8 @@ func transfer_from(buffer):
 		if y < buffer.size.height:
 				for x in range(size.width):
 					if x < buffer.size.width:
-						var i = index(Vector2(x,y)) # new
-						var j = buffer.index(Vector2(x,y)) # old
+						var i = index(x,y) # new
+						var j = buffer.index(x,y) # old
 						# new      # old
 						chars[i]    = buffer.chars[j]
 						fgcolors[i] = buffer.fgcolors[j]
