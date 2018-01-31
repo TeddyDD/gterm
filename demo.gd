@@ -25,7 +25,7 @@ func _ready():
 	
 	
 	# current terminal style
-	current_style = terminal.Style.new(fg_picker.get_color(), bg_picker.get_color(), 0)
+	current_style = terminal.Style.new(fg_picker.color, bg_picker.color, 0)
 	
 	# add menu items for fonts
 	font_select.add_item("Normal", 0)
@@ -101,8 +101,9 @@ func _on_new_line_pressed():
 
 
 func _on_Terminal_input_event( ev ):
-	if ev.type == InputEvent.MOUSE_MOTION and draw_mouse:
-		var c = terminal.get_cell(Vector2(ev.x, ev.y))
+	
+	if ev is InputEventMouseMotion and draw_mouse:
+		var c = terminal.get_cell(Vector2(ev.position.x, ev.position.y))
 		terminal.write(c.x, c.y, "#", current_style)
 		terminal.redraw_terminal()
 

@@ -32,20 +32,20 @@ func _init(size, fg, bg, character=" ", font_id=0, set_defaults=true):
 
 # return index for given column and row
 func index(x, y):
-	return y * size.width + x
+	return y * size.x + x
 	
 # return column and row for given point
 func get_point(index):
 	return Vector2(int(index) % int(size.y), int(index/size.y))
 	
 func get_size():
-	return size.width * size.height
+	return size.x * size.y
 
 func transfer_from(buffer):
-	for y in range(size.height):
-		if y < buffer.size.height:
-				for x in range(size.width):
-					if x < buffer.size.width:
+	for y in range(size.y):
+		if y < buffer.size.y:
+				for x in range(size.x):
+					if x < buffer.size.x:
 						var i = index(x,y) # new
 						var j = buffer.index(x,y) # old
 						# new      # old

@@ -1,21 +1,22 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/terminal/terminal.gd" type="Script" id=1]
 [ext_resource path="res://addons/terminal/terminal_draw.gd" type="Script" id=2]
 
-[node name="Terminal" type="Control"]
+[node name="Terminal" type="Control" index="0"]
 
-anchor/right = 1
-anchor/bottom = 1
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 984.0
-margin/bottom = 560.0
-script/script = ExtResource( 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 984.0
+margin_bottom = 560.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource( 1 )
 dynamicFont = null
 foregound_default = Color( 1, 1, 1, 1 )
 background_default = Color( 0, 0, 0, 1 )
@@ -24,33 +25,46 @@ font_y_offset = 0
 resize_cell_x = 1
 resize_cell_y = 1
 
-[node name="capture" type="Viewport" parent="."]
+[node name="capture" type="Viewport" parent="." index="0"]
 
-rect = Rect2( 0, 0, 40, 40 )
+arvr = false
+size = Vector2( 0, 0 )
 own_world = false
 world = null
-transparent_bg = false
-render_target/enabled = true
-render_target/v_flip = false
-render_target/clear_on_new_frame = false
-render_target/filter = false
-render_target/gen_mipmaps = false
-render_target/update_mode = 3
-audio_listener/enable_2d = false
-audio_listener/enable_3d = false
-physics/object_picking = false
-gui/disable_input = false
+transparent_bg = true
+msaa = 0
+hdr = true
+disable_3d = false
+usage = 0
+debug_draw = 0
+render_target_v_flip = true
+render_target_clear_mode = 2
+render_target_update_mode = 2
+audio_listener_enable_2d = false
+audio_listener_enable_3d = false
+physics_object_picking = false
+gui_disable_input = false
+gui_snap_controls_to_pixels = true
+shadow_atlas_size = 0
+shadow_atlas_quad_0 = 2
+shadow_atlas_quad_1 = 2
+shadow_atlas_quad_2 = 3
+shadow_atlas_quad_3 = 4
+_sections_unfolded = [ "Render Target", "Rendering" ]
 
-[node name="draw buffer" type="Control" parent="capture"]
+[node name="draw buffer" type="Control" parent="capture" index="0"]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
-script/script = ExtResource( 2 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource( 2 )
 
 

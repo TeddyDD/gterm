@@ -21,14 +21,14 @@ func request_full_redraw():
 	mode = FULL_REDRAW
 
 func on_resize():
-	get_parent().set_rect(Rect2(Vector2(), get_size()))
+	get_parent().size = get_size()
 	set_size(term.get_size())
 	
 
 func _draw():
 	var t = OS.get_ticks_msec()
 	if term._draw_texture != null and mode == DAMAGE_REDRAW:
-		term._draw_texture = get_parent().get_render_target_texture()
+		term._draw_texture = get_parent().get_texture()
 		draw_texture(term._draw_texture, Vector2())
 		on_resize()
 		_redraw(term.buffer.damage)
@@ -42,11 +42,11 @@ func _draw():
 	else: # full redraw
 		draw_bg()
 		_redraw(range(term.buffer.get_size()))
-		term._draw_texture = get_parent().get_render_target_texture()
+		term._draw_texture = get_parent().get_texture()
 		emit_signal("_done_rendering", FULL_REDRAW)
 	term.buffer.damage = []
 	_draw_time = (OS.get_ticks_msec() - t)
-	
+	prints(_draw_time)
 
 func draw_bg():
 	draw_rect(get_rect(), term.defaultStyle.bg)
@@ -57,8 +57,8 @@ func _redraw(indexes):
 	var fgcolor_now
 	var font_now
 	var font_pos = Vector2()
-	var bg_rect = Rect2(0,0, term.cell.width, term.cell.height)
-	var w = term.buffer.size.width
+	var bg_rect = Rect2(0,0, term.cell.x, term.cell.y)
+	var w = term.buffer.size.x
 	var default_font = term.defaultStyle.font
 	var cell = term.cell
 	var fonts = term.buffer.fonts
@@ -72,15 +72,15 @@ func _redraw(indexes):
 	var i = 0
 	var x = 0
 	var y = 0
-	var size = term.buffer.size.width
+	var size = term.buffer.size.x
 	
 	for i in (indexes):
 			x = int(i) % int(size) 
 			y = int(i/size)
 			# draw bg
 			if bg[i] != null or bg[i] != def_bg:
-				bg_rect.pos.x = x * cell.width
-				bg_rect.pos.y = y * cell.height
+				bg_rect.position.x = x * cell.x
+				bg_rect.position.y = y * cell.y
 				draw_rect(bg_rect, bg[i])
 			# draw text
 			char_now = chars[i]
@@ -95,6 +95,6 @@ func _redraw(indexes):
 					if fgcolor_now == null:
 						fgcolor_now = fonts[term.defaultStyle.font]
 							
-					font_pos.x = (x * cell.width) + (cell.width * term.font_x_offset)
-					font_pos.y = (y * cell.height) + font_now.get_ascent() + (cell.height * term.font_y_offset)
+					font_pos.x = (x * cell.x) + (cell.x * term.font_x_offset)
+					font_pos.y = (y * cell.y) + font_now.get_ascent() + (cell.y * term.font_y_offset)
 					draw_char( font_now, font_pos, char_now, "W", fgcolor_now)

@@ -1,4 +1,4 @@
-tool
+
 extends Control
 
 # export variables
@@ -54,8 +54,8 @@ var _redraw = true
 
 # return cell from mouse coordinates
 func get_cell(point):
-	return Vector2(clamp(floor(point.x / cell.width), 0, grid.x - 1),
-	               clamp(floor(point.y / cell.height), 0, grid.y - 1))
+	return Vector2(clamp(floor(point.x / cell.x), 0, grid.x - 1),
+	               clamp(floor(point.y / cell.y), 0, grid.y - 1))
 
 # Write character in given postion using given style
 # any parameter can be null
@@ -97,11 +97,11 @@ func write_string(x, y, string, style=defaultStyle):
 		if style.font != null:
 			buffer.fonts[i] = style.font
 		# wrap lines
-		if cursor.x >= grid.width - 1:
+		if cursor.x >= grid.x - 1:
 			cursor.y += 1
 			cursor.x = 0
-		elif cursor.y >= grid.height:
-			cursor.y = grid.height - 1
+		elif cursor.y >= grid.y:
+			cursor.y = grid.y - 1
 			return cursor
 		else:
 			cursor.x += 1
@@ -136,7 +136,7 @@ func write_all(character=null, style=defaultStyle):
 # add font to fonts array and calulate size
 # returns ID of font
 func add_font(f):
-	assert(f.get_type() == "DynamicFont")
+	assert(f is DynamicFont)
 	fonts.append(f)
 	_calculate_size()
 	# return id of added font
@@ -157,7 +157,7 @@ func redraw_terminal():
 
 func _ready():
 	# editor check
-	_editor = get_tree().is_editor_hint()
+	_editor = Engine.editor_hint
 	
 	# default style
 	defaultStyle = Style.new(foregound_default, background_default, 0)
@@ -178,7 +178,7 @@ func _ready():
 		set_process(true)
 		
 func _render_done(mode):
-	_draw_texture = get_node("capture").get_render_target_texture()
+	_draw_texture = get_node("capture").get_texture()
 	update()
 	if mode == _draw_buffer.FULL_REDRAW:
 		buffer.damage = []
@@ -212,20 +212,20 @@ func _check_bounds(x, y):
 # Calculate the grid size. Final result depens of font size
 func _calculate_size():
 	
-	var width = get_size().width
-	var height = get_size().height
+	var width = get_size().x
+	var height = get_size().y
 
 	# Get size of biggest font
 	# prevous max cell size
 	var c = Vector2() 
 	for f in fonts:
-		cell.width = max( int(f.get_string_size("W").width * resize_cell_x ), c.width)
-		cell.height = max( int(f.get_height() * resize_cell_y ), c.height)
+		cell.x = max( int(f.get_string_size("W").x * resize_cell_x ), c.x)
+		cell.y = max( int(f.get_height() * resize_cell_y ), c.y)
 		# I want a copy, not reference
 		c = cell + Vector2(0,0)
 	
-	grid.width = ( width - (int(width) % int(cell.width)) ) / cell.width
-	grid.height = ( height - (int(height) % int(cell.height)) ) / cell.height
+	grid.x = ( width - (int(width) % int(cell.x)) ) / cell.x
+	grid.y = ( height - (int(height) % int(cell.y)) ) / cell.y
 
 # Call manually when changed font size
 func _on_resize(): # signal
