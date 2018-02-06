@@ -22,7 +22,7 @@ Screenshot of `demo.tscn` | [Gif - Input](https://66.media.tumblr.com/ef38b96196
 
 ## Project Setup
 
-Godot Engine version >= 2.1 is required.
+Godot Engine version <3.0 && >= 2.1 is required.
 
 ## Testing
 
