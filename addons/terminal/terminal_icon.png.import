@@ -3,20 +3,21 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/terminal_icon.png-f044a01fcf77c9105bf58c0d48f6bf46.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://addons/terminal/terminal_icon.png"
-source_md5="5a89eeed1cadc7599e895fa6358e7182"
-
 dest_files=[ "res://.import/terminal_icon.png-f044a01fcf77c9105bf58c0d48f6bf46.stex" ]
-dest_md5="0a36d4ea7e113bcbaacfdfcb7f759006"
 
 [params]
 
 compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
+compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
@@ -26,6 +27,7 @@ flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
+process/invert_color=false
 stream=false
 size_limit=0
 detect_3d=true

@@ -69,7 +69,7 @@ func _redraw(indexes):
 		
 	# draw letters and boxes
 	# index
-	var i = 0
+	# var i = 0
 	var x = 0
 	var y = 0
 	var size = term.buffer.size.x

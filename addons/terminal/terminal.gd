@@ -55,7 +55,7 @@ var _redraw = true
 # return cell from mouse coordinates
 func get_cell(point):
 	return Vector2(clamp(floor(point.x / cell.x), 0, grid.x - 1),
-	               clamp(floor(point.y / cell.y), 0, grid.y - 1))
+				   clamp(floor(point.y / cell.y), 0, grid.y - 1))
 
 # Write character in given postion using given style
 # any parameter can be null
@@ -193,7 +193,7 @@ func _process(delta):
 
 func _draw():
 	if _editor:
-		draw_rect(Rect2(get_global_rect().pos - get_global_pos(), get_size()), background_default)
+		draw_rect(Rect2(get_global_rect().position - get_global_rect().position, get_size()), background_default)
 	
 	if _draw_texture != null:
 		draw_texture(_draw_texture, Vector2(0,0))
